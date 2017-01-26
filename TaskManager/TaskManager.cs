@@ -12,75 +12,49 @@ namespace TaskManager
 {
     public partial class TaskManager : Form
     {
-
-        private Button taskButton;
-        private Point taskDragPoint;
-
+        private Button buttonTask;
 
         public TaskManager()
         {
             InitializeComponent();
 
-            this.taskButton = new Button();
+            this.buttonTask = new Button();
+            this.buttonTask.AutoSize = true;
+            this.buttonTask.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            this.buttonTask.BackColor = Color.White;
+            this.buttonTask.Dock = DockStyle.Top;
+            this.buttonTask.Location = new Point(3, 3);
+            this.buttonTask.Name = "buttonTask";
+            this.buttonTask.Size = new Size(192, 23);
+            this.buttonTask.TabIndex = 0;
+            this.buttonTask.Text = "Task";
+            this.buttonTask.UseVisualStyleBackColor = false;
+            this.buttonTask.MouseDown += new MouseEventHandler(this.buttonTask_MouseDown);
 
-            this.taskButton.BackColor = Color.Aquamarine;
-            this.taskButton.Dock = DockStyle.Top;
-            this.taskButton.AllowDrop = true;
-            this.taskButton.Location = new Point(0, 0);
-            this.taskButton.Name = "taskButton";
-            this.taskButton.Size = new Size(200, 40);
-            this.taskButton.TabIndex = 0;
-            this.taskButton.Text = "Task";
-            this.taskButton.UseVisualStyleBackColor = false;
-            this.taskButton.MouseDown += this.taskButton_MouseDown;
-            this.taskButton.MouseDown += this.button1_OnClick;
-
-
-
-            this.tableLayoutPanel1.Controls.Add(this.taskButton, 0, 0);
+            this.tableLayoutBacklog.Controls.Add(this.buttonTask, 0, 0);
 
         }
 
-        private void TaskManager_Load(object sender, EventArgs e)
-        {
-
+        private void buttonTask_MouseDown(object sender, MouseEventArgs e)
+        {          
+            ((Control)sender).DoDragDrop(sender, DragDropEffects.All);
         }
 
-        private void tableLayoutPanel_DragDrop(object sender, DragEventArgs e)
-        {
-            ((Button)e.Data.GetData(typeof(Button))).BringToFront();
+        private void tableLayoutBody_DragDrop(object sender, DragEventArgs e)
+        {            
+            TableLayoutPanel layoutPanel = sender as TableLayoutPanel;
+            layoutPanel.RowCount++;
+            layoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+
+            tableLayoutBacklog.Controls.Add(buttonTask, 0, layoutPanel.RowCount);
+          //  ((Button)e.Data.GetData(typeof(Button))).BringToFront();
         }
 
-        private void tableLayoutPanel_DragEnter(object sender, DragEventArgs e)
+        private void tableLayoutBody_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(Button)))
                 e.Effect = DragDropEffects.All;
         }
-
-        private void taskButton_OnClick(object sender, MouseEventArgs e)
-        {
-            int i = 0;
-        }
-
-        private void taskButton_MouseDown(object sender, MouseEventArgs e)
-        {
-            taskDragPoint = new Point(e.X, e.Y);        
-            ((Control)sender).DoDragDrop(sender, DragDropEffects.All);
-        }  
-
-        private void tableLayoutPanel_DragOver(object sender, DragEventArgs e)
-        {
-            ((Control)e.Data.GetData(typeof(Button))).Location =
-                this.PointToClient(new Point(e.X - taskDragPoint.X, e.Y - taskDragPoint.Y));
-            ((Control)e.Data.GetData(typeof(Button))).BringToFront();
-        }
-
-        private void button1_OnClick(object sender, EventArgs e)
-        {
-            int i = 0;
-        }
-
-   
 
     }
 }
