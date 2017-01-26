@@ -49,6 +49,9 @@
     <Compile Include="ProductOwner.cs" />
     <Compile Include="ScrumMaster.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="TaskButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TaskManager.cs">
       <SubType>Form</SubType>
     </Compile>
