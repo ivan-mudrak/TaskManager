@@ -30,12 +30,14 @@
         {
             this.tableLayoutMain = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutBody = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutBacklog = new System.Windows.Forms.TableLayoutPanel();
-            this.tableLayoutInProgress = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutDone = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutBackLog = new System.Windows.Forms.FlowLayoutPanel();
             this.buttonNewTask = new System.Windows.Forms.Button();
+            this.flowLayoutInProgress = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutAccepted = new System.Windows.Forms.FlowLayoutPanel();
             this.tableLayoutMain.SuspendLayout();
             this.tableLayoutBody.SuspendLayout();
-            this.tableLayoutBacklog.SuspendLayout();
+            this.flowLayoutBackLog.SuspendLayout();
             this.SuspendLayout();
             // 
             // tableLayoutMain
@@ -52,7 +54,7 @@
             this.tableLayoutMain.RowCount = 2;
             this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 12.2807F));
             this.tableLayoutMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 87.7193F));
-            this.tableLayoutMain.Size = new System.Drawing.Size(834, 461);
+            this.tableLayoutMain.Size = new System.Drawing.Size(1110, 575);
             this.tableLayoutMain.TabIndex = 0;
             // 
             // tableLayoutBody
@@ -65,72 +67,97 @@
             this.tableLayoutBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
             this.tableLayoutBody.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25F));
-            this.tableLayoutBody.Controls.Add(this.tableLayoutBacklog, 0, 0);
-            this.tableLayoutBody.Controls.Add(this.tableLayoutInProgress, 1, 0);
+            this.tableLayoutBody.Controls.Add(this.flowLayoutDone, 2, 0);
+            this.tableLayoutBody.Controls.Add(this.flowLayoutBackLog, 0, 0);
+            this.tableLayoutBody.Controls.Add(this.flowLayoutInProgress, 1, 0);
+            this.tableLayoutBody.Controls.Add(this.flowLayoutAccepted, 3, 0);
             this.tableLayoutBody.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutBody.Location = new System.Drawing.Point(4, 61);
+            this.tableLayoutBody.Location = new System.Drawing.Point(4, 75);
             this.tableLayoutBody.Name = "tableLayoutBody";
             this.tableLayoutBody.RowCount = 1;
             this.tableLayoutBody.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutBody.Size = new System.Drawing.Size(826, 396);
+            this.tableLayoutBody.Size = new System.Drawing.Size(1102, 496);
             this.tableLayoutBody.TabIndex = 0;
             // 
-            // tableLayoutBacklog
+            // flowLayoutDone
             // 
-            this.tableLayoutBacklog.AllowDrop = true;
-            this.tableLayoutBacklog.AutoSize = true;
-            this.tableLayoutBacklog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutBacklog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.tableLayoutBacklog.ColumnCount = 1;
-            this.tableLayoutBacklog.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutBacklog.Controls.Add(this.buttonNewTask, 0, 0);
-            this.tableLayoutBacklog.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutBacklog.Location = new System.Drawing.Point(5, 5);
-            this.tableLayoutBacklog.Name = "tableLayoutBacklog";
-            this.tableLayoutBacklog.RowCount = 1;
-            this.tableLayoutBacklog.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutBacklog.Size = new System.Drawing.Size(198, 386);
-            this.tableLayoutBacklog.TabIndex = 0;
-            this.tableLayoutBacklog.DragDrop += new System.Windows.Forms.DragEventHandler(this.tableLayoutBody_DragDrop);
-            this.tableLayoutBacklog.DragEnter += new System.Windows.Forms.DragEventHandler(this.tableLayoutBody_DragEnter);
+            this.flowLayoutDone.AllowDrop = true;
+            this.flowLayoutDone.AutoSize = true;
+            this.flowLayoutDone.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.flowLayoutDone.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutDone.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutDone.Location = new System.Drawing.Point(555, 5);
+            this.flowLayoutDone.Name = "flowLayoutDone";
+            this.flowLayoutDone.Size = new System.Drawing.Size(267, 486);
+            this.flowLayoutDone.TabIndex = 2;
+            this.flowLayoutDone.DragDrop += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragDrop);
+            this.flowLayoutDone.DragEnter += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragEnter);
             // 
-            // tableLayoutInProgress
+            // flowLayoutBackLog
             // 
-            this.tableLayoutInProgress.AllowDrop = true;
-            this.tableLayoutInProgress.AutoSize = true;
-            this.tableLayoutInProgress.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tableLayoutInProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.tableLayoutInProgress.ColumnCount = 1;
-            this.tableLayoutInProgress.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutInProgress.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutInProgress.Location = new System.Drawing.Point(211, 5);
-            this.tableLayoutInProgress.Name = "tableLayoutInProgress";
-            this.tableLayoutInProgress.RowCount = 1;
-            this.tableLayoutInProgress.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutInProgress.Size = new System.Drawing.Size(198, 386);
-            this.tableLayoutInProgress.TabIndex = 1;
-            this.tableLayoutInProgress.DragDrop += new System.Windows.Forms.DragEventHandler(this.tableLayoutBody_DragDrop);
-            this.tableLayoutInProgress.DragEnter += new System.Windows.Forms.DragEventHandler(this.tableLayoutBody_DragEnter);
+            this.flowLayoutBackLog.AllowDrop = true;
+            this.flowLayoutBackLog.AutoScroll = true;
+            this.flowLayoutBackLog.AutoSize = true;
+            this.flowLayoutBackLog.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutBackLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.flowLayoutBackLog.Controls.Add(this.buttonNewTask);
+            this.flowLayoutBackLog.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutBackLog.Location = new System.Drawing.Point(5, 5);
+            this.flowLayoutBackLog.Name = "flowLayoutBackLog";
+            this.flowLayoutBackLog.Size = new System.Drawing.Size(267, 486);
+            this.flowLayoutBackLog.TabIndex = 3;
+            this.flowLayoutBackLog.DragDrop += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragDrop);
+            this.flowLayoutBackLog.DragEnter += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragEnter);
             // 
             // buttonNewTask
             // 
-            this.buttonNewTask.AutoSize = true;
-            this.buttonNewTask.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.buttonNewTask.BackColor = System.Drawing.Color.White;
-            this.buttonNewTask.Dock = System.Windows.Forms.DockStyle.Top;
-            this.buttonNewTask.Location = new System.Drawing.Point(3, 3);
+            this.buttonNewTask.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.buttonNewTask.BackColor = System.Drawing.Color.Transparent;
+            this.buttonNewTask.Location = new System.Drawing.Point(3, 3);           
             this.buttonNewTask.Name = "buttonNewTask";
-            this.buttonNewTask.Size = new System.Drawing.Size(192, 23);
+            this.buttonNewTask.Size = new System.Drawing.Size(200, 40);
             this.buttonNewTask.TabIndex = 0;
             this.buttonNewTask.Text = "add new task";
             this.buttonNewTask.UseVisualStyleBackColor = false;
             this.buttonNewTask.Click += new System.EventHandler(this.buttonNewTask_OnClick);
             // 
+            // flowLayoutInProgress
+            // 
+            this.flowLayoutInProgress.AllowDrop = true;
+            this.flowLayoutInProgress.AutoScroll = true;
+            this.flowLayoutInProgress.AutoSize = true;
+            this.flowLayoutInProgress.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutInProgress.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.flowLayoutInProgress.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutInProgress.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            this.flowLayoutInProgress.Location = new System.Drawing.Point(280, 5);
+            this.flowLayoutInProgress.Name = "flowLayoutInProgress";
+            this.flowLayoutInProgress.Size = new System.Drawing.Size(267, 486);
+            this.flowLayoutInProgress.TabIndex = 4;
+            this.flowLayoutInProgress.DragDrop += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragDrop);
+            this.flowLayoutInProgress.DragEnter += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragEnter);
+            // 
+            // flowLayoutAccepted
+            // 
+            this.flowLayoutAccepted.AllowDrop = true;
+            this.flowLayoutAccepted.AutoScroll = true;
+            this.flowLayoutAccepted.AutoSize = true;
+            this.flowLayoutAccepted.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.flowLayoutAccepted.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.flowLayoutAccepted.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutAccepted.Location = new System.Drawing.Point(830, 5);
+            this.flowLayoutAccepted.Name = "flowLayoutAccepted";
+            this.flowLayoutAccepted.Size = new System.Drawing.Size(267, 486);
+            this.flowLayoutAccepted.TabIndex = 5;
+            this.flowLayoutAccepted.DragDrop += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragDrop);
+            this.flowLayoutAccepted.DragEnter += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragEnter);
+            // 
             // TaskManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 461);
+            this.ClientSize = new System.Drawing.Size(1110, 575);
             this.Controls.Add(this.tableLayoutMain);
             this.Name = "TaskManager";
             this.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultBounds;
@@ -139,8 +166,7 @@
             this.tableLayoutMain.PerformLayout();
             this.tableLayoutBody.ResumeLayout(false);
             this.tableLayoutBody.PerformLayout();
-            this.tableLayoutBacklog.ResumeLayout(false);
-            this.tableLayoutBacklog.PerformLayout();
+            this.flowLayoutBackLog.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -150,9 +176,11 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutBody;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutBacklog;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutInProgress;
         private System.Windows.Forms.Button buttonNewTask;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutDone;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutBackLog;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutInProgress;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutAccepted;
     }
 }
 

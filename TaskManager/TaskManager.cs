@@ -14,22 +14,10 @@ namespace TaskManager
     public partial class TaskManager : Form
     {
         private readonly Collection<TaskButton> taskButtonCollection;
-        private TaskButton taskButton1, taskButton2;
-        private TableLayoutPanel taskCurrentLayoutPanel;
 
         public TaskManager()
         {
-            InitializeComponent();
-
-            taskButton1 = new TaskButton();    
-            taskButton1.MouseDown += new MouseEventHandler(this.buttonTask_MouseDown);
-            this.tableLayoutInProgress.Controls.Add(this.taskButton1, 0, 0);
-
-            taskButton2 = new TaskButton();
-            taskButton2.MouseDown += new MouseEventHandler(this.buttonTask_MouseDown);
-
-            this.tableLayoutInProgress.Controls.Add(this.taskButton2, 0, 0);
-
+            InitializeComponent();         
         }
 
         private void buttonTask_MouseDown(object sender, MouseEventArgs e)
@@ -37,14 +25,14 @@ namespace TaskManager
             ((Control)sender).DoDragDrop(sender, DragDropEffects.All);
         }
 
-        private void tableLayoutBody_DragDrop(object sender, DragEventArgs e)
+        private void layoutPanel_DragDrop(object sender, DragEventArgs e)
         {
-            TableLayoutPanel layoutPanel = sender as TableLayoutPanel;
+            Panel layoutPanel = sender as Panel;
             TaskButton taskButton = e.Data.GetData(typeof(TaskButton)) as TaskButton;
-            layoutPanel.Controls.Add(taskButton, 0, layoutPanel.RowCount);     
+            layoutPanel.Controls.Add(taskButton);     
         }
 
-        private void tableLayoutBody_DragEnter(object sender, DragEventArgs e)
+        private void layoutPanel_DragEnter(object sender, DragEventArgs e)
         {
             if (e.Data.GetDataPresent(typeof(TaskButton)))
             {
@@ -56,7 +44,7 @@ namespace TaskManager
         {
             TaskButton taskButton = new TaskButton();
             taskButton.MouseDown += new MouseEventHandler(this.buttonTask_MouseDown);
-            tableLayoutBacklog.Controls.Add(taskButton, 0, 0);
+            flowLayoutBackLog.Controls.Add(taskButton);                        
         }
     }
 }
