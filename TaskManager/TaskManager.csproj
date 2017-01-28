@@ -44,7 +44,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BodyPanel.cs" />
     <Compile Include="Developer.cs" />
+    <Compile Include="HeaderPanel.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="ProductOwner.cs" />
     <Compile Include="ScrumMaster.cs" />
@@ -64,9 +66,6 @@
     <Compile Include="Tester.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserManager.cs" />
-    <Compile Include="ViewPanel.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

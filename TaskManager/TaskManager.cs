@@ -27,9 +27,15 @@ namespace TaskManager
 
         private void layoutPanel_DragDrop(object sender, DragEventArgs e)
         {
-            Panel layoutPanel = sender as Panel;
             TaskButton taskButton = e.Data.GetData(typeof(TaskButton)) as TaskButton;
-            layoutPanel.Controls.Add(taskButton);     
+            if (sender is Panel)
+            {             
+                (sender as Panel).Controls.Add(taskButton);
+            }
+            else if(sender is GroupBox)
+            {
+                (sender as GroupBox).Controls.Add(taskButton);
+            }
         }
 
         private void layoutPanel_DragEnter(object sender, DragEventArgs e)

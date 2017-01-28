@@ -16,12 +16,13 @@ namespace TaskManager
 
         public TaskButton()
         {
-            AutoSize = false;         
-            BackColor = Color.White;    
+            AutoSize = false;
+            BackColor = Color.Transparent;
+            FlatStyle = FlatStyle.Popup;
             Location = new Point(0, 0);
             Name = "buttonTask"; // TODO: name genartor
-            Size = new Size(200, 40);
-            Text = String.Format("Task {0}", taskNumber++);         
-        } 
+            Size = new Size(228, 40);
+            Text = String.Format("Task {0}", taskNumber++);
+        }
     }
 }
