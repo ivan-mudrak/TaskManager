@@ -51,11 +51,14 @@
     <Compile Include="ProductOwner.cs" />
     <Compile Include="ScrumMaster.cs" />
     <Compile Include="Task.cs" />
-    <Compile Include="TaskButton.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="TaskCard.cs">
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="TaskDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TaskDialog.Designer.cs">
+      <DependentUpon>TaskDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="TaskManager.cs">
       <SubType>Form</SubType>
@@ -78,6 +81,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="TaskDialog.resx">
+      <DependentUpon>TaskDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskManager.resx">
       <DependentUpon>TaskManager.cs</DependentUpon>
     </EmbeddedResource>

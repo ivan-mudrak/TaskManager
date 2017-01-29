@@ -12,22 +12,22 @@ using System.Windows.Forms;
 namespace TaskManager
 {
     public partial class TaskManager : Form
-    {
-        private readonly Collection<TaskButton> taskButtonCollection;
-
+    {        
         public TaskManager()
         {
-            InitializeComponent();         
-        }   
+            InitializeComponent();
+        }
 
         private void layoutPanel_DragDrop(object sender, DragEventArgs e)
         {
-           
-            TaskCard panel = e.Data.GetData(typeof(TaskCard)) as TaskCard;
-            if (sender is Panel)
-            {             
-                (sender as Panel).Controls.Add(panel);
-            }        
+
+            if (e.Data.GetDataPresent(typeof(TaskCard)))
+            {
+                if (sender is Panel)
+                {
+                    (sender as Panel).Controls.Add(e.Data.GetData(typeof(TaskCard)) as TaskCard);
+                }
+            }
         }
 
         private void layoutPanel_DragEnter(object sender, DragEventArgs e)
@@ -39,8 +39,12 @@ namespace TaskManager
         }
 
         private void buttonNewTask_OnClick(object sender, EventArgs e)
-        {          
-            flowLayoutBackLog.Controls.Add(new TaskCard());                        
+        {
+            TaskDialog dialog = new TaskDialog();
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+int i  = 0;
+            }        
         }
     }
 }
