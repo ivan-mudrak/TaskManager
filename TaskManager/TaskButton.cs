@@ -21,7 +21,7 @@ namespace TaskManager
             FlatStyle = FlatStyle.Popup;
             Location = new Point(0, 0);
             Name = "buttonTask"; // TODO: name genartor
-            Size = new Size(228, 40);
+            Size = new Size(228, 80);
             Text = String.Format("Task {0}", taskNumber++);
         }
     }

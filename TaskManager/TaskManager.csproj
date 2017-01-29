@@ -54,6 +54,9 @@
     <Compile Include="TaskButton.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="TaskCard.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="TaskManager.cs">
       <SubType>Form</SubType>
     </Compile>
