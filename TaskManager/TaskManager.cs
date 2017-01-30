@@ -12,7 +12,8 @@ using System.Windows.Forms;
 namespace TaskManager
 {
     public partial class TaskManager : Form
-    {        
+    {
+
         public TaskManager()
         {
             InitializeComponent();
@@ -41,10 +42,15 @@ namespace TaskManager
         private void buttonNewTask_OnClick(object sender, EventArgs e)
         {
             TaskDialog dialog = new TaskDialog();
-            if(dialog.ShowDialog() == DialogResult.OK)
+            if (dialog.ShowDialog() == DialogResult.OK)
             {
-int i  = 0;
-            }        
+                TaskBuilder taskBuilder = new TaskBuilder();
+                taskBuilder.SetTitle(() => dialog.Title);
+                taskBuilder.SetDescription(() => dialog.Description);
+                Task task = taskBuilder.GetTask();
+
+                flowLayoutBackLog.Controls.Add(task.GetView());
+            }
         }
     }
 }

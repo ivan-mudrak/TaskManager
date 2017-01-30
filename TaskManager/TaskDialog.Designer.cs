@@ -41,8 +41,7 @@
             this.SuspendLayout();
             // 
             // buttonSave
-            // 
-            this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            //            
             this.buttonSave.Location = new System.Drawing.Point(228, 279);
             this.buttonSave.Name = "buttonSave";
             this.buttonSave.Size = new System.Drawing.Size(80, 30);

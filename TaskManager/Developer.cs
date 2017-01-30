@@ -32,7 +32,7 @@ namespace TaskManager
     [DeveloperInfo("mud@simcorp.com", 1)]
     class Developer : User
     {       
-        public Developer(string name, Seniorities seniority, Team team)
+        public Developer()
         {
               
         }

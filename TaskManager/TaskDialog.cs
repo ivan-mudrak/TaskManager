@@ -13,14 +13,6 @@ namespace TaskManager
 {
     public partial class TaskDialog : Form
     {
-        struct Error
-        {
-            private Control errorControl;
-            private string errorMsg;
-        }
-
-        private Collection<Error> errorCollection;
-
         public TaskDialog()
         {
             InitializeComponent();
@@ -33,12 +25,66 @@ namespace TaskManager
 
         private void buttonSave_OnClick(object sender, EventArgs e)
         {
-
+            string errorString = ValidateTask();
+            if (errorString.Length > 0)
+            {
+                string errorMsgBoxCaption = "Error during save";
+                MessageBoxButtons errorMsgBoxButtons = MessageBoxButtons.OK;
+                MessageBox.Show(errorString, errorMsgBoxCaption, errorMsgBoxButtons, MessageBoxIcon.Error);
+            }
+            else
+            {
+                DialogResult = DialogResult.OK;
+                Close();
+            }
         }
 
-        private bool Validate(Collection<Control> controlsCollection)
+        private string ValidateTask()
         {
-            return true;
+            StringBuilder errorStringBuilder = new StringBuilder();
+            if (richTextBoxTitle.TextLength <= 0)
+            {
+                errorStringBuilder.AppendLine();
+                errorStringBuilder.Append(labelTitle.Text);
+            }
+            if (richTextBoxDescription.TextLength <= 0)
+            {
+                errorStringBuilder.AppendLine();
+                errorStringBuilder.Append(labelDescription.Text);
+            }
+            //if (comboBoxDevelopers.SelectedIndex == -1)
+            //{
+            //    errorStringBuilder.AppendLine();
+            //    errorStringBuilder.Append(labelDevelopers.Text);
+            //}
+            //if (comboBoxTesters.SelectedIndex == -1)
+            //{
+            //    errorStringBuilder.AppendLine();
+            //    errorStringBuilder.Append(labelTesters.Text);
+            //}
+
+            if (errorStringBuilder.Length > 0)
+            {
+                errorStringBuilder = (new StringBuilder("Please specify following info:")).Append(errorStringBuilder);
+            }
+
+            return errorStringBuilder.ToString();
         }
+
+
+
+
+        public string Title
+        {
+            get { return richTextBoxTitle.Text; }
+        }
+
+        public string Description
+        {
+            get { return richTextBoxDescription.Text; }
+        }
+
+      
+
     }
 }

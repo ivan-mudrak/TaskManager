@@ -1,5 +1,4 @@
 ﻿
-using System;
 using System.Windows.Forms;
 
 namespace TaskManager
@@ -9,27 +8,27 @@ namespace TaskManager
     {
         private TableLayoutPanel _developerLayoutPanel, _testerLayoutPanel;
         private Label _developerLabel, _testerLabel;
-        private Label _caption, _developers, _testers;
+        private Label _title, _developers, _testers;
         private RichTextBox _description;
-        private MouseEventHandler ChildMouseDown;
+        private MouseEventHandler _childMouseDown;
 
-        public TaskCard()
+        public TaskCard(string title, string description, Developer developer, Tester tester)
         {
             // 
-            // _caption
+            // _title
             // 
-            _caption = new Label();
-            _caption.Anchor = (AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right);
-            _caption.AutoEllipsis = true;
-            _caption.AutoSize = true;
-            _caption.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            _caption.Location = new System.Drawing.Point(1, 1);
-            _caption.Margin = new Padding(0);
-            _caption.Name = "caption";
-            _caption.Size = new System.Drawing.Size(221, 15);
-            _caption.TabIndex = 2;
-            _caption.Text = "Caption";
-            _caption.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
+            _title = new Label();
+            _title.Anchor = (AnchorStyles.Left | AnchorStyles.Right);
+            _title.AutoEllipsis = true;
+            _title.AutoSize = true;
+            _title.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            _title.Location = new System.Drawing.Point(1, 1);
+            _title.Margin = new Padding(0);
+            _title.Name = "title";
+            _title.Size = new System.Drawing.Size(221, 15);
+            _title.TabIndex = 2;
+            _title.Text = title;
+            _title.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _description
             // 
@@ -43,7 +42,7 @@ namespace TaskManager
             _description.ScrollBars = RichTextBoxScrollBars.Vertical;
             _description.Size = new System.Drawing.Size(221, 65);
             _description.TabIndex = 3;
-            _description.Text = "\n";
+            _description.Text = description;
             _description.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _developerLabel
@@ -70,7 +69,7 @@ namespace TaskManager
             _developers.Name = "developers";
             _developers.Size = new System.Drawing.Size(39, 13);
             _developers.TabIndex = 2;
-            _developers.Text = "Balmer";
+            _developers.Text = developer.ToString();
             _developers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _developerLayoutPanel
@@ -93,7 +92,7 @@ namespace TaskManager
             // _testerLabel
             // 
             _testerLabel = new Label();
-            _testerLabel.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            _testerLabel.Anchor = AnchorStyles.Right;
             _testerLabel.Font = new System.Drawing.Font("Consolas", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             _testerLabel.AutoSize = true;
             _testerLabel.Location = new System.Drawing.Point(34, 1);
@@ -114,7 +113,7 @@ namespace TaskManager
             _testers.Name = "testers";
             _testers.Size = new System.Drawing.Size(39, 13);
             _testers.TabIndex = 2;
-            _testers.Text = "Balmer";
+            _testers.Text = tester.ToString();
             _testers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _testerLayoutPanel
@@ -139,7 +138,7 @@ namespace TaskManager
             CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             ColumnCount = 1;
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
-            Controls.Add(_caption, 0, 0);
+            Controls.Add(_title, 0, 0);
             Controls.Add(_description, 0, 1);
             Controls.Add(_developerLayoutPanel, 0, 2);
             Controls.Add(_testerLayoutPanel, 0, 3);
@@ -153,7 +152,7 @@ namespace TaskManager
             RowStyles.Add(new RowStyle(SizeType.Percent, 13.63636F));
             Size = new System.Drawing.Size(223, 116);
             TabIndex = 0;     
-            ChildMouseDown += new MouseEventHandler(taskCard_ChildMouseDown);
+            _childMouseDown += new MouseEventHandler(taskCard_ChildMouseDown);
         }
 
         private void taskCardChild_MouseDown(object sender, MouseEventArgs e)

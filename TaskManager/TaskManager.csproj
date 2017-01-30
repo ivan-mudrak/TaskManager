@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="JetBrains.Annotations">
+      <HintPath>..\packages\JetBrains.Annotations.10.2.1\lib\net\JetBrains.Annotations.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,10 +50,12 @@
     <Compile Include="BodyPanel.cs" />
     <Compile Include="Developer.cs" />
     <Compile Include="HeaderPanel.cs" />
+    <Compile Include="ITaskBuilder.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="ProductOwner.cs" />
     <Compile Include="ScrumMaster.cs" />
     <Compile Include="Task.cs" />
+    <Compile Include="TaskBuilder.cs" />
     <Compile Include="TaskCard.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -87,6 +92,7 @@
     <EmbeddedResource Include="TaskManager.resx">
       <DependentUpon>TaskManager.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
