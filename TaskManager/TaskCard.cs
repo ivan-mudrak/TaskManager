@@ -1,5 +1,7 @@
 ﻿
+using System;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 namespace TaskManager
 {
@@ -11,8 +13,9 @@ namespace TaskManager
         private Label _title, _developers, _testers;
         private RichTextBox _description;
         private MouseEventHandler _childMouseDown;
+        private EventHandler _childDoubleClick;
 
-        public TaskCard(string title, string description, Developer developer, Tester tester)
+        public TaskCard([NotNull]string title, [NotNull]string description, [NotNull]Developer developer, [NotNull]Tester tester)
         {
             // 
             // _title
@@ -28,22 +31,22 @@ namespace TaskManager
             _title.Size = new System.Drawing.Size(221, 15);
             _title.TabIndex = 2;
             _title.Text = title;
-            _title.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
+            _title.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
             // 
             // _description
             // 
-            _description = new RichTextBox();      
+            _description = new RichTextBox();
             _description.BorderStyle = BorderStyle.None;
-            _description.Dock = DockStyle.Fill;               
+            _description.Dock = DockStyle.Fill;
             _description.Location = new System.Drawing.Point(1, 17);
             _description.Margin = new Padding(0);
             _description.Name = "description";
-            _description.ReadOnly = true;            
+            _description.ReadOnly = true;
             _description.ScrollBars = RichTextBoxScrollBars.Vertical;
             _description.Size = new System.Drawing.Size(221, 65);
             _description.TabIndex = 3;
             _description.Text = description;
-            _description.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
+            _description.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
             // 
             // _developerLabel
             // 
@@ -56,7 +59,7 @@ namespace TaskManager
             _developerLabel.Size = new System.Drawing.Size(85, 13);
             _developerLabel.TabIndex = 0;
             _developerLabel.Text = "Developer(s):";
-            _developerLabel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
+            _developerLabel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
             // 
             // _developers
             // 
@@ -70,7 +73,7 @@ namespace TaskManager
             _developers.Size = new System.Drawing.Size(39, 13);
             _developers.TabIndex = 2;
             _developers.Text = developer.ToString();
-            _developers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
+            _developers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
             // 
             // _developerLayoutPanel
             // 
@@ -88,6 +91,7 @@ namespace TaskManager
             _developerLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             _developerLayoutPanel.Size = new System.Drawing.Size(221, 15);
             _developerLayoutPanel.TabIndex = 0;
+            _developerLayoutPanel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
             // 
             // _testerLabel
             // 
@@ -100,7 +104,7 @@ namespace TaskManager
             _testerLabel.Size = new System.Drawing.Size(51, 13);
             _testerLabel.TabIndex = 0;
             _testerLabel.Text = "Tester(s):";
-            _testerLabel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
+            _testerLabel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
             // 
             // _testers
             // 
@@ -114,7 +118,7 @@ namespace TaskManager
             _testers.Size = new System.Drawing.Size(39, 13);
             _testers.TabIndex = 2;
             _testers.Text = tester.ToString();
-            _testers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
+            _testers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
             // 
             // _testerLayoutPanel
             // 
@@ -132,8 +136,7 @@ namespace TaskManager
             _testerLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             _testerLayoutPanel.Size = new System.Drawing.Size(221, 16);
             _testerLayoutPanel.TabIndex = 1;
-            _testerLayoutPanel. MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
-
+            _testerLayoutPanel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
 
             CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             ColumnCount = 1;
@@ -151,18 +154,36 @@ namespace TaskManager
             RowStyles.Add(new RowStyle(SizeType.Percent, 13.63636F));
             RowStyles.Add(new RowStyle(SizeType.Percent, 13.63636F));
             Size = new System.Drawing.Size(223, 116);
-            TabIndex = 0;     
+            TabIndex = 0;
             _childMouseDown += new MouseEventHandler(taskCard_ChildMouseDown);
+            _childDoubleClick += new EventHandler(taskCard_ChildDoubleClick);
+        }  
+
+        private void taskCard_ChildDoubleClick(object sender, EventArgs e)
+        {
+            TaskDialog dialog = new TaskDialog(_title.Text, _description.Text, null, null);
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+
+            }
         }
 
         private void taskCardChild_MouseDown(object sender, MouseEventArgs e)
         {
-            taskCard_ChildMouseDown(sender, e);
+            if (e.Button == MouseButtons.Left && e.Clicks == 1)
+            {
+                taskCard_ChildDoubleClick(sender, e);
+            }
+            else
+            {
+                taskCard_ChildMouseDown(sender, e);
+            }
+      
         }
 
         private void taskCard_ChildMouseDown(object sender, MouseEventArgs e)
         {
             DoDragDrop(this, DragDropEffects.All);
-        }  
+        }
     }
 }

@@ -8,33 +8,25 @@ namespace TaskManager
 {
     public enum Seniorities
     {
-        Trainee,
         Junior,
         Middle,
         Senior
     }
 
-    [AttributeUsage(AttributeTargets.All)]
-    public class DeveloperInfo : Attribute
+    public class Developer : User
     {
-        private string _emailAddress;
-        private int _revision;
-       
-
-        public DeveloperInfo(string emailAddress, int revision)
-        {
-            this._emailAddress = emailAddress;
-            this._revision = revision;        
-        }
-    }
-
-    [Serializable]
-    [DeveloperInfo("mud@simcorp.com", 1)]
-    class Developer : User
-    {       
         public Developer()
+            : base()
         {
-              
+
         }
+
+        public override string Name { get; set; }
+        public override Team Team { get; set; }
+
+        public override Roles Role
+        {
+            get { return Roles.Developer; }
+        }        
     }
 }

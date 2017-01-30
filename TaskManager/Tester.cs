@@ -6,7 +6,30 @@ using System.Threading.Tasks;
 
 namespace TaskManager
 {
-    class Tester
+    public class Tester : User
     {
+        public override string Name { get; set; }
+        public override Team Team { get; set; }
+
+        public override Roles Role
+        {
+            get { return Roles.Tester; }
+        }
+
+
+        public Tester()
+        {
+
+        }
+
+        public override HeaderPanel BuildHeaderPanel(User user)
+        {
+            return null;
+        }
+
+        public override BodyPanel BuildBodyPanel(User user)
+        {
+            return null;
+        }
     }
 }

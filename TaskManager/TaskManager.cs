@@ -13,10 +13,12 @@ namespace TaskManager
 {
     public partial class TaskManager : Form
     {
+        private User _currentUser;
 
         public TaskManager()
         {
             InitializeComponent();
+            
         }
 
         private void layoutPanel_DragDrop(object sender, DragEventArgs e)
@@ -51,6 +53,11 @@ namespace TaskManager
 
                 flowLayoutBackLog.Controls.Add(task.GetView());
             }
+        }
+
+        private void buttonLogIn_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

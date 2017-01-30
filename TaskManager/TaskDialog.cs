@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using JetBrains.Annotations;
 
 namespace TaskManager
 {
@@ -16,6 +17,13 @@ namespace TaskManager
         public TaskDialog()
         {
             InitializeComponent();
+        }
+
+        public TaskDialog([NotNull] string title, [NotNull]string description, Developer developer = null, Tester tester = null)
+        {
+            InitializeComponent();
+            richTextBoxTitle.Text = title;
+            richTextBoxDescription.Text = description;
         }
 
         private void buttonCancel_OnClick(object sender, EventArgs e)

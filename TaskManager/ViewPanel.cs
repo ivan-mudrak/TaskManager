@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace TaskManager
 {
-    public class BodyPanel : TableLayoutPanel
+    abstract class ViewPanel : Panel
     {
 
     }

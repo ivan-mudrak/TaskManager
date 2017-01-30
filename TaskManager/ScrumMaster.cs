@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TaskManager
 {
-    class ScrumMaster : User
+    class ScrumMaster 
     {
     }
 }

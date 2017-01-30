@@ -51,6 +51,7 @@
     <Compile Include="Developer.cs" />
     <Compile Include="HeaderPanel.cs" />
     <Compile Include="ITaskBuilder.cs" />
+    <Compile Include="IUserCreator.cs" />
     <Compile Include="Manager.cs" />
     <Compile Include="ProductOwner.cs" />
     <Compile Include="ScrumMaster.cs" />
