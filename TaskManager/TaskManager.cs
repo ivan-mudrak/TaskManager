@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,11 +15,13 @@ namespace TaskManager
     public partial class TaskManager : Form
     {
         private User _currentUser;
+        SqlConnection sqlConnection;
 
         public TaskManager()
         {
             InitializeComponent();
-            
+      //      String connectionString = @"metadata=res://*/DatabaseModel.csdl|res://*/DatabaseModel.ssdl|res://*/DatabaseModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\TaskManagerDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework&quot;";
+       //     sqlConnection = new SqlConnection(connectionString);                
         }
 
         private void layoutPanel_DragDrop(object sender, DragEventArgs e)
@@ -51,6 +54,19 @@ namespace TaskManager
                 taskBuilder.SetDescription(() => dialog.Description);
                 Task task = taskBuilder.GetTask();
 
+                using (var dbContainer = new DatabaseModelContainer())
+                {
+
+                    Teams team = new Teams();
+                    team.Name = "IT";
+                    dbContainer.TeamsSet.Add(team);
+                    dbContainer.SaveChanges();
+                }
+
+            
+             
+                
+
                 flowLayoutBackLog.Controls.Add(task.GetView());
             }
         }
@@ -59,5 +75,7 @@ namespace TaskManager
         {
 
         }
+
+      
     }
 }
