@@ -28,28 +28,28 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.buttonOk = new System.Windows.Forms.Button();
+            this.buttonSave = new System.Windows.Forms.Button();
             this.buttonCancel = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelTitle = new System.Windows.Forms.Label();
             this.richTextBoxTitle = new System.Windows.Forms.RichTextBox();
             this.labelDescription = new System.Windows.Forms.Label();
             this.richTextBoxDescription = new System.Windows.Forms.RichTextBox();
             this.labelDevelopers = new System.Windows.Forms.Label();
             this.comboBoxDevelopers = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelTesters = new System.Windows.Forms.Label();
             this.comboBoxTesters = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
-            // buttonOk
+            // buttonSave
             // 
-            this.buttonOk.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.buttonOk.Location = new System.Drawing.Point(228, 279);
-            this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(80, 30);
-            this.buttonOk.TabIndex = 0;
-            this.buttonOk.Text = "OK";
-            this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.buttonOk_OnClick);
+            this.buttonSave.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.buttonSave.Location = new System.Drawing.Point(228, 279);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(80, 30);
+            this.buttonSave.TabIndex = 0;
+            this.buttonSave.Text = "Save";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_OnClick);
             // 
             // buttonCancel
             // 
@@ -62,15 +62,15 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_OnClick);
             // 
-            // label1
+            // labelTitle
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(67, 26);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(42, 15);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Title";
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTitle.Location = new System.Drawing.Point(67, 26);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(42, 15);
+            this.labelTitle.TabIndex = 2;
+            this.labelTitle.Text = "Title";
             // 
             // richTextBoxTitle
             // 
@@ -116,24 +116,26 @@
             // 
             // comboBoxDevelopers
             // 
+            this.comboBoxDevelopers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxDevelopers.FormattingEnabled = true;
             this.comboBoxDevelopers.Location = new System.Drawing.Point(115, 180);
             this.comboBoxDevelopers.Name = "comboBoxDevelopers";
             this.comboBoxDevelopers.Size = new System.Drawing.Size(154, 21);
             this.comboBoxDevelopers.TabIndex = 7;
             // 
-            // label2
+            // labelTesters
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(39, 219);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 15);
-            this.label2.TabIndex = 8;
-            this.label2.Text = "Tester(s)";
+            this.labelTesters.AutoSize = true;
+            this.labelTesters.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelTesters.Location = new System.Drawing.Point(39, 219);
+            this.labelTesters.Name = "labelTesters";
+            this.labelTesters.Size = new System.Drawing.Size(70, 15);
+            this.labelTesters.TabIndex = 8;
+            this.labelTesters.Text = "Tester(s)";
             // 
             // comboBoxTesters
             // 
+            this.comboBoxTesters.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxTesters.FormattingEnabled = true;
             this.comboBoxTesters.Location = new System.Drawing.Point(115, 217);
             this.comboBoxTesters.Name = "comboBoxTesters";
@@ -142,22 +144,22 @@
             // 
             // TaskDialog
             // 
-            this.AcceptButton = this.buttonOk;
+            this.AcceptButton = this.buttonSave;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.buttonCancel;
             this.ClientSize = new System.Drawing.Size(434, 321);
             this.ControlBox = false;
             this.Controls.Add(this.comboBoxTesters);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelTesters);
             this.Controls.Add(this.comboBoxDevelopers);
             this.Controls.Add(this.labelDevelopers);
             this.Controls.Add(this.richTextBoxDescription);
             this.Controls.Add(this.labelDescription);
             this.Controls.Add(this.richTextBoxTitle);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelTitle);
             this.Controls.Add(this.buttonCancel);
-            this.Controls.Add(this.buttonOk);
+            this.Controls.Add(this.buttonSave);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -171,15 +173,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Button buttonOk;
+        private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonCancel;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelTitle;
         private System.Windows.Forms.RichTextBox richTextBoxTitle;
         private System.Windows.Forms.Label labelDescription;
         private System.Windows.Forms.RichTextBox richTextBoxDescription;
         private System.Windows.Forms.Label labelDevelopers;
         private System.Windows.Forms.ComboBox comboBoxDevelopers;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelTesters;
         private System.Windows.Forms.ComboBox comboBoxTesters;
     }
 }
