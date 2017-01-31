@@ -17,34 +17,32 @@ namespace TaskManager
     {
         private Users _currentUser;
         private HeaderPanel _headerPanel;
-        private EventHandler _userChanged;
-        private readonly Action<Users> _chgUser;
+        private readonly Action<Users> _userChangedAction;
 
 
         public TaskManager()
         {
             InitializeComponent();
-            _chgUser = user =>
+            _userChangedAction = user =>
              {
                  _currentUser = user;
-                 tableLayoutMain_UserChanged(this, EventArgs.Empty);
+                 tableLayoutMain_UserChanged();
 
              };
-            _headerPanel = new HeaderPanelLogIn(_chgUser);
-            tableLayoutMain.Controls.Add(_headerPanel, 0, 0);
-            _userChanged += new EventHandler(tableLayoutMain_UserChanged);
+            _headerPanel = new HeaderPanelLogIn(_userChangedAction);
+            tableLayoutMain.Controls.Add(_headerPanel, 0, 0);         
         }
 
-        private void tableLayoutMain_UserChanged(object sender, EventArgs e)
+        private void tableLayoutMain_UserChanged()
         {
             tableLayoutMain.Controls.Remove(_headerPanel);
             if (_currentUser != null)
             {
-                _headerPanel = new HeaderPanelUser(_chgUser, _currentUser);
+                _headerPanel = new HeaderPanelUser(_userChangedAction, _currentUser);
             }
             else
             {
-                _headerPanel = new HeaderPanelLogIn(_chgUser, _currentUser);
+                _headerPanel = new HeaderPanelLogIn(_userChangedAction, _currentUser);
             }
             tableLayoutMain.Controls.Add(_headerPanel, 0, 0);
         }
@@ -87,11 +85,6 @@ namespace TaskManager
 
                 flowLayoutBackLog.Controls.Add(task.GetView());
             }
-        }
-
-        private void labelTeam_Click(object sender, EventArgs e)
-        {
-
-        }
+        } 
     }
 }

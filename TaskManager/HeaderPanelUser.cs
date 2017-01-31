@@ -11,6 +11,7 @@ namespace TaskManager
         private Label labelFullName;
         private Label labelTeam;
         private Button buttonLogOut;
+        private Users _user;
         private Action<Users> _userAction;
 
         public HeaderPanelUser(Action<Users> userAction, [NotNull]Users user)
@@ -18,6 +19,7 @@ namespace TaskManager
         {
 
             _userAction = userAction;
+            _user = user;
             labelFullName = new Label();
             labelFullRole = new Label();
             labelTeam = new Label();
@@ -38,7 +40,7 @@ namespace TaskManager
             Controls.Add(buttonLogOut, 2, 0);
             Dock = DockStyle.Fill;
             Location = new Point(4, 4);
-            Name = "tableLayoutPanel2";
+            Name = "tableLayoutHeaderUser";
             RowCount = 2;
             RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
             RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
@@ -54,7 +56,7 @@ namespace TaskManager
             labelFullName.Name = "labelFullName";
             labelFullName.Size = new Size(482, 22);
             labelFullName.TabIndex = 0;
-            labelFullName.Text = "FirstName";
+            labelFullName.Text = _user.FirstName + ", " + _user.SecondName;
             labelFullName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelFullRole
@@ -95,7 +97,7 @@ namespace TaskManager
 
         }
 
-        void buttonLogOut_Click(object sender, EventArgs e)
+        private void buttonLogOut_Click(object sender, EventArgs e)
         {
             _userAction(null);
         }
