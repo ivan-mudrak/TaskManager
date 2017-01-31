@@ -15,8 +15,7 @@
         {
             if (disposing && (components != null))
             {
-                components.Dispose();
-          //      sqlConnection.Close();
+                components.Dispose();        
             }
             base.Dispose(disposing);
         }

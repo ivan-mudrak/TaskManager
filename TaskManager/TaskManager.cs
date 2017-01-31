@@ -19,9 +19,7 @@ namespace TaskManager
 
         public TaskManager()
         {
-            InitializeComponent();
-      //      String connectionString = @"metadata=res://*/DatabaseModel.csdl|res://*/DatabaseModel.ssdl|res://*/DatabaseModel.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=(LocalDB)\MSSQLLocalDB;attachdbfilename=|DataDirectory|\TaskManagerDatabase.mdf;integrated security=True;connect timeout=30;MultipleActiveResultSets=True;App=EntityFramework&quot;";
-       //     sqlConnection = new SqlConnection(connectionString);                
+            InitializeComponent();                     
         }
 
         private void layoutPanel_DragDrop(object sender, DragEventArgs e)
@@ -54,19 +52,18 @@ namespace TaskManager
                 taskBuilder.SetDescription(() => dialog.Description);
                 Task task = taskBuilder.GetTask();
 
-                using (var dbContainer = new DatabaseModelContainer())
-                {
 
+                using(var dbContainer = new DataModelContainer())
+                {
                     Teams team = new Teams();
-                    team.Name = "IT";
+                    team.Name = "BOI-FI-IT-D";
+                    dbContainer.Database.Connection.Open();
                     dbContainer.TeamsSet.Add(team);
                     dbContainer.SaveChanges();
+                    dbContainer.Database.Connection.Close();
                 }
-
-            
-             
-                
-
+     
+                                         
                 flowLayoutBackLog.Controls.Add(task.GetView());
             }
         }

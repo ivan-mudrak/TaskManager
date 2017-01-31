@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/30/2017 21:56:01
--- Generated from EDMX file: C:\Users\Ivan\Source\Repos\TaskManager\TaskManager\DatabaseModel.edmx
+-- Date Created: 01/31/2017 15:39:20
+-- Generated from EDMX file: C:\Users\mud\Documents\Visual Studio 2013\Projects\TaskManager\TaskManager\DataModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,21 +17,51 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_TeamsUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UsersSet] DROP CONSTRAINT [FK_TeamsUsers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TasksUsers_Tasks]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TasksUsers] DROP CONSTRAINT [FK_TasksUsers_Tasks];
+GO
+IF OBJECT_ID(N'[dbo].[FK_TasksUsers_Users]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[TasksUsers] DROP CONSTRAINT [FK_TasksUsers_Users];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[TeamsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TeamsSet];
+GO
+IF OBJECT_ID(N'[dbo].[UsersSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UsersSet];
+GO
+IF OBJECT_ID(N'[dbo].[TasksSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TasksSet];
+GO
+IF OBJECT_ID(N'[dbo].[TasksUsers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TasksUsers];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
 -- --------------------------------------------------
 
+-- Creating table 'TeamsSet'
+CREATE TABLE [dbo].[TeamsSet] (
+    [TeamId] int IDENTITY(1,1) NOT NULL,
+    [Name] nvarchar(max)  NOT NULL
+);
+GO
+
 -- Creating table 'UsersSet'
 CREATE TABLE [dbo].[UsersSet] (
     [UserId] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(100)  NOT NULL,
-    [Role] nvarchar(max)  NOT NULL,
+    [Name] nvarchar(max)  NOT NULL,
+    [Role] smallint  NOT NULL,
+    [Seniority] smallint  NOT NULL,
+    [Team] nvarchar(max)  NOT NULL,
     [TeamsTeamId] int  NOT NULL
 );
 GO
@@ -40,14 +70,8 @@ GO
 CREATE TABLE [dbo].[TasksSet] (
     [TaskId] int IDENTITY(1,1) NOT NULL,
     [Title] nvarchar(max)  NOT NULL,
-    [Description] nvarchar(max)  NOT NULL
-);
-GO
-
--- Creating table 'TeamsSet'
-CREATE TABLE [dbo].[TeamsSet] (
-    [TeamId] int IDENTITY(1,1) NOT NULL,
-    [Name] nvarchar(100)  NOT NULL
+    [Description] nvarchar(max)  NOT NULL,
+    [Status] smallint  NOT NULL
 );
 GO
 
@@ -62,6 +86,12 @@ GO
 -- Creating all PRIMARY KEY constraints
 -- --------------------------------------------------
 
+-- Creating primary key on [TeamId] in table 'TeamsSet'
+ALTER TABLE [dbo].[TeamsSet]
+ADD CONSTRAINT [PK_TeamsSet]
+    PRIMARY KEY CLUSTERED ([TeamId] ASC);
+GO
+
 -- Creating primary key on [UserId] in table 'UsersSet'
 ALTER TABLE [dbo].[UsersSet]
 ADD CONSTRAINT [PK_UsersSet]
@@ -72,12 +102,6 @@ GO
 ALTER TABLE [dbo].[TasksSet]
 ADD CONSTRAINT [PK_TasksSet]
     PRIMARY KEY CLUSTERED ([TaskId] ASC);
-GO
-
--- Creating primary key on [TeamId] in table 'TeamsSet'
-ALTER TABLE [dbo].[TeamsSet]
-ADD CONSTRAINT [PK_TeamsSet]
-    PRIMARY KEY CLUSTERED ([TeamId] ASC);
 GO
 
 -- Creating primary key on [Tasks_TaskId], [Users_UserId] in table 'TasksUsers'
@@ -92,15 +116,14 @@ GO
 
 -- Creating foreign key on [TeamsTeamId] in table 'UsersSet'
 ALTER TABLE [dbo].[UsersSet]
-ADD CONSTRAINT [FK_UsersTeams]
+ADD CONSTRAINT [FK_TeamsUsers]
     FOREIGN KEY ([TeamsTeamId])
     REFERENCES [dbo].[TeamsSet]
         ([TeamId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
--- Creating non-clustered index for FOREIGN KEY 'FK_UsersTeams'
-CREATE INDEX [IX_FK_UsersTeams]
+-- Creating non-clustered index for FOREIGN KEY 'FK_TeamsUsers'
+CREATE INDEX [IX_FK_TeamsUsers]
 ON [dbo].[UsersSet]
     ([TeamsTeamId]);
 GO
@@ -121,7 +144,6 @@ ADD CONSTRAINT [FK_TasksUsers_Users]
     REFERENCES [dbo].[UsersSet]
         ([UserId])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_TasksUsers_Users'
 CREATE INDEX [IX_FK_TasksUsers_Users]
