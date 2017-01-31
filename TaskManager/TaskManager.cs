@@ -14,8 +14,7 @@ namespace TaskManager
 {
     public partial class TaskManager : Form
     {
-        private User _currentUser;
-        SqlConnection sqlConnection;
+        private User _currentUser;      
 
         public TaskManager()
         {
@@ -29,7 +28,7 @@ namespace TaskManager
             {
                 if (sender is Panel)
                 {
-                    (sender as Panel).Controls.Add(e.Data.GetData(typeof(TaskCard)) as TaskCard);
+                    ((Panel) sender).Controls.Add(e.Data.GetData(typeof(TaskCard)) as TaskCard);
                 }
             }
         }
@@ -42,7 +41,7 @@ namespace TaskManager
             }
         }
 
-        private void buttonNewTask_OnClick(object sender, EventArgs e)
+        private async void buttonNewTask_OnClick(object sender, EventArgs e)
         {
             TaskDialog dialog = new TaskDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -56,14 +55,13 @@ namespace TaskManager
                 using(var dbContainer = new DataModelContainer())
                 {
                     Teams team = new Teams();
-                    team.Name = "BOI-FI-IT-D";
-                    dbContainer.Database.Connection.Open();
+                    team.Name = "BOI-FI-IP-D";
+                    await dbContainer.Database.Connection.OpenAsync();
                     dbContainer.TeamsSet.Add(team);
                     dbContainer.SaveChanges();
                     dbContainer.Database.Connection.Close();
                 }
-     
-                                         
+                                              
                 flowLayoutBackLog.Controls.Add(task.GetView());
             }
         }
@@ -71,8 +69,6 @@ namespace TaskManager
         private void buttonLogIn_Click(object sender, EventArgs e)
         {
 
-        }
-
-      
+        }      
     }
 }

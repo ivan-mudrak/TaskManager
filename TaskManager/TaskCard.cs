@@ -170,7 +170,7 @@ namespace TaskManager
 
         private void taskCardChild_MouseDown(object sender, MouseEventArgs e)
         {
-            if (e.Button == MouseButtons.Left && e.Clicks == 1)
+            if ((e.Button == MouseButtons.Left) && (e.Clicks == 2))
             {
                 taskCard_ChildDoubleClick(sender, e);
             }

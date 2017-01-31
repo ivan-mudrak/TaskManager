@@ -16,6 +16,13 @@ namespace TaskManager
         Tester
     }
 
+    public enum Seniorities
+    {
+        Junior,
+        Middle,
+        Senior
+    }
+
     public abstract class User
     {
         public abstract string Name { get; set; }

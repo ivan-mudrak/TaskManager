@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 01/31/2017 15:39:20
+-- Date Created: 01/31/2017 17:38:14
 -- Generated from EDMX file: C:\Users\mud\Documents\Visual Studio 2013\Projects\TaskManager\TaskManager\DataModel.edmx
 -- --------------------------------------------------
 
@@ -17,31 +17,31 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_TeamsUsers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[UsersSet] DROP CONSTRAINT [FK_TeamsUsers];
-GO
 IF OBJECT_ID(N'[dbo].[FK_TasksUsers_Tasks]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TasksUsers] DROP CONSTRAINT [FK_TasksUsers_Tasks];
 GO
 IF OBJECT_ID(N'[dbo].[FK_TasksUsers_Users]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[TasksUsers] DROP CONSTRAINT [FK_TasksUsers_Users];
 GO
+IF OBJECT_ID(N'[dbo].[FK_TeamsUsers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[UsersSet] DROP CONSTRAINT [FK_TeamsUsers];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[TeamsSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[TeamsSet];
-GO
-IF OBJECT_ID(N'[dbo].[UsersSet]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[UsersSet];
-GO
 IF OBJECT_ID(N'[dbo].[TasksSet]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TasksSet];
 GO
 IF OBJECT_ID(N'[dbo].[TasksUsers]', 'U') IS NOT NULL
     DROP TABLE [dbo].[TasksUsers];
+GO
+IF OBJECT_ID(N'[dbo].[TeamsSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[TeamsSet];
+GO
+IF OBJECT_ID(N'[dbo].[UsersSet]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[UsersSet];
 GO
 
 -- --------------------------------------------------
@@ -62,7 +62,10 @@ CREATE TABLE [dbo].[UsersSet] (
     [Role] smallint  NOT NULL,
     [Seniority] smallint  NOT NULL,
     [Team] nvarchar(max)  NOT NULL,
-    [TeamsTeamId] int  NOT NULL
+    [TeamsTeamId] int  NOT NULL,
+    [Password] nvarchar(max)  NOT NULL,
+    [FirstName] nvarchar(max)  NOT NULL,
+    [SecondName] nvarchar(max)  NOT NULL
 );
 GO
 

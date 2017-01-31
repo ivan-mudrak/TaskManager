@@ -6,12 +6,6 @@ using System.Threading.Tasks;
 
 namespace TaskManager
 {
-    public enum Seniorities
-    {
-        Junior,
-        Middle,
-        Senior
-    }
 
     public class Developer : User
     {
