@@ -95,6 +95,12 @@
     <Compile Include="HeaderPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="HeaderPanelLogIn.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="HeaderPanelUser.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ITaskBuilder.cs" />
     <Compile Include="IUserCreator.cs" />
     <Compile Include="Manager.cs" />

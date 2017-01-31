@@ -40,20 +40,13 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonNewTask = new System.Windows.Forms.Button();
             this.flowLayoutBackLog = new System.Windows.Forms.FlowLayoutPanel();
-            this.tableLayoutHeader = new System.Windows.Forms.TableLayoutPanel();
-            this.buttonLogIn = new System.Windows.Forms.Button();
-            this.labelPassword = new System.Windows.Forms.Label();
-            this.textBoxPassword = new System.Windows.Forms.TextBox();
-            this.labelUser = new System.Windows.Forms.Label();
-            this.textBoxUser = new System.Windows.Forms.TextBox();
             this.tableLayoutMain.SuspendLayout();
             this.tableLayoutBody.SuspendLayout();
             this.groupBoxDone.SuspendLayout();
             this.groupBoxTest.SuspendLayout();
             this.groupBoxDevelopment.SuspendLayout();
             this.groupBoxBackLog.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
-            this.tableLayoutHeader.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();    
             this.SuspendLayout();
             // 
             // tableLayoutMain
@@ -63,8 +56,7 @@
             this.tableLayoutMain.CellBorderStyle = System.Windows.Forms.TableLayoutPanelCellBorderStyle.Single;
             this.tableLayoutMain.ColumnCount = 1;
             this.tableLayoutMain.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutMain.Controls.Add(this.tableLayoutBody, 0, 1);
-            this.tableLayoutMain.Controls.Add(this.tableLayoutHeader, 0, 0);
+            this.tableLayoutMain.Controls.Add(this.tableLayoutBody, 0, 1);      
             this.tableLayoutMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutMain.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutMain.Name = "tableLayoutMain";
@@ -228,82 +220,6 @@
             this.flowLayoutBackLog.DragDrop += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragDrop);
             this.flowLayoutBackLog.DragEnter += new System.Windows.Forms.DragEventHandler(this.layoutPanel_DragEnter);
             // 
-            // tableLayoutHeader
-            // 
-            this.tableLayoutHeader.BackColor = System.Drawing.Color.PowderBlue;
-            this.tableLayoutHeader.ColumnCount = 6;
-            this.tableLayoutHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tableLayoutHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutHeader.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutHeader.Controls.Add(this.buttonLogIn, 5, 0);
-            this.tableLayoutHeader.Controls.Add(this.labelPassword, 3, 0);
-            this.tableLayoutHeader.Controls.Add(this.textBoxPassword, 4, 0);
-            this.tableLayoutHeader.Controls.Add(this.labelUser, 1, 0);
-            this.tableLayoutHeader.Controls.Add(this.textBoxUser, 2, 0);
-            this.tableLayoutHeader.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutHeader.Location = new System.Drawing.Point(4, 4);
-            this.tableLayoutHeader.Name = "tableLayoutHeader";
-            this.tableLayoutHeader.RowCount = 1;
-            this.tableLayoutHeader.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutHeader.Size = new System.Drawing.Size(976, 64);
-            this.tableLayoutHeader.TabIndex = 1;
-            // 
-            // buttonLogIn
-            // 
-            this.buttonLogIn.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.buttonLogIn.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonLogIn.Location = new System.Drawing.Point(891, 17);
-            this.buttonLogIn.Name = "buttonLogIn";
-            this.buttonLogIn.Size = new System.Drawing.Size(70, 30);
-            this.buttonLogIn.TabIndex = 2;
-            this.buttonLogIn.Text = "LogIn";
-            this.buttonLogIn.UseVisualStyleBackColor = true;
-            this.buttonLogIn.Click += new System.EventHandler(this.buttonLogIn_Click);
-            // 
-            // labelPassword
-            // 
-            this.labelPassword.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelPassword.AutoSize = true;
-            this.labelPassword.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelPassword.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelPassword.Location = new System.Drawing.Point(647, 23);
-            this.labelPassword.Name = "labelPassword";
-            this.labelPassword.Size = new System.Drawing.Size(80, 18);
-            this.labelPassword.TabIndex = 3;
-            this.labelPassword.Text = "Password:";
-            // 
-            // textBoxPassword
-            // 
-            this.textBoxPassword.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxPassword.Location = new System.Drawing.Point(733, 22);
-            this.textBoxPassword.Name = "textBoxPassword";
-            this.textBoxPassword.PasswordChar = '*';
-            this.textBoxPassword.Size = new System.Drawing.Size(140, 20);
-            this.textBoxPassword.TabIndex = 4;
-            // 
-            // labelUser
-            // 
-            this.labelUser.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.labelUser.AutoSize = true;
-            this.labelUser.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.labelUser.Font = new System.Drawing.Font("Consolas", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelUser.Location = new System.Drawing.Point(436, 23);
-            this.labelUser.Name = "labelUser";
-            this.labelUser.Size = new System.Drawing.Size(48, 18);
-            this.labelUser.TabIndex = 5;
-            this.labelUser.Text = "User:";
-            // 
-            // textBoxUser
-            // 
-            this.textBoxUser.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.textBoxUser.Location = new System.Drawing.Point(490, 22);
-            this.textBoxUser.Name = "textBoxUser";
-            this.textBoxUser.Size = new System.Drawing.Size(140, 20);
-            this.textBoxUser.TabIndex = 6;
-            // 
             // TaskManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -322,9 +238,7 @@
             this.groupBoxDevelopment.ResumeLayout(false);
             this.groupBoxBackLog.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
-            this.tableLayoutHeader.ResumeLayout(false);
-            this.tableLayoutHeader.PerformLayout();
+            this.tableLayoutPanel1.PerformLayout();       
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -334,13 +248,7 @@
 
         private System.Windows.Forms.TableLayoutPanel tableLayoutMain;
         private System.Windows.Forms.TableLayoutPanel tableLayoutBody;
-        private System.Windows.Forms.Button buttonNewTask;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutHeader;
-        private System.Windows.Forms.Button buttonLogIn;
-        private System.Windows.Forms.Label labelPassword;
-        private System.Windows.Forms.TextBox textBoxPassword;
-        private System.Windows.Forms.Label labelUser;
-        private System.Windows.Forms.TextBox textBoxUser;
+        private System.Windows.Forms.Button buttonNewTask;        
         private System.Windows.Forms.GroupBox groupBoxDone;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutDone;
         private System.Windows.Forms.GroupBox groupBoxTest;
@@ -349,7 +257,7 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutDevelopment;
         private System.Windows.Forms.GroupBox groupBoxBackLog;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.FlowLayoutPanel flowLayoutBackLog;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutBackLog;  
     }
 }
 

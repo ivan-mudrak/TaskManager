@@ -9,16 +9,44 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Microsoft.SqlServer.Server;
 
 namespace TaskManager
 {
     public partial class TaskManager : Form
     {
-        private User _currentUser;      
+        private Users _currentUser;
+        private HeaderPanel _headerPanel;
+        private EventHandler _userChanged;
+        private readonly Action<Users> _chgUser;
+
 
         public TaskManager()
         {
-            InitializeComponent();                     
+            InitializeComponent();
+            _chgUser = user =>
+             {
+                 _currentUser = user;
+                 tableLayoutMain_UserChanged(this, EventArgs.Empty);
+
+             };
+            _headerPanel = new HeaderPanelLogIn(_chgUser);
+            tableLayoutMain.Controls.Add(_headerPanel, 0, 0);
+            _userChanged += new EventHandler(tableLayoutMain_UserChanged);
+        }
+
+        private void tableLayoutMain_UserChanged(object sender, EventArgs e)
+        {
+            tableLayoutMain.Controls.Remove(_headerPanel);
+            if (_currentUser != null)
+            {
+                _headerPanel = new HeaderPanelUser(_chgUser, _currentUser);
+            }
+            else
+            {
+                _headerPanel = new HeaderPanelLogIn(_chgUser, _currentUser);
+            }
+            tableLayoutMain.Controls.Add(_headerPanel, 0, 0);
         }
 
         private void layoutPanel_DragDrop(object sender, DragEventArgs e)
@@ -28,7 +56,7 @@ namespace TaskManager
             {
                 if (sender is Panel)
                 {
-                    ((Panel) sender).Controls.Add(e.Data.GetData(typeof(TaskCard)) as TaskCard);
+                    ((Panel)sender).Controls.Add(e.Data.GetData(typeof(TaskCard)) as TaskCard);
                 }
             }
         }
@@ -41,7 +69,7 @@ namespace TaskManager
             }
         }
 
-        private async void buttonNewTask_OnClick(object sender, EventArgs e)
+        private void buttonNewTask_OnClick(object sender, EventArgs e)
         {
             TaskDialog dialog = new TaskDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
@@ -52,23 +80,18 @@ namespace TaskManager
                 Task task = taskBuilder.GetTask();
 
 
-                using(var dbContainer = new DataModelContainer())
+                using (var dbContainer = new DataModelContainer())
                 {
-                    Teams team = new Teams();
-                    team.Name = "BOI-FI-IP-D";
-                    await dbContainer.Database.Connection.OpenAsync();
-                    dbContainer.TeamsSet.Add(team);
-                    dbContainer.SaveChanges();
-                    dbContainer.Database.Connection.Close();
+                    // commit do DB
                 }
-                                              
+
                 flowLayoutBackLog.Controls.Add(task.GetView());
             }
         }
 
-        private void buttonLogIn_Click(object sender, EventArgs e)
+        private void labelTeam_Click(object sender, EventArgs e)
         {
 
-        }      
+        }
     }
 }
