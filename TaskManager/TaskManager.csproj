@@ -76,6 +76,13 @@
     <Compile Include="BodyPanel.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="BodyPanelAdmin.cs" />
+    <Compile Include="BodyPanelEmpty.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BodyPanelUser.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DataModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

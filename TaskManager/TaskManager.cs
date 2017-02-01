@@ -10,6 +10,7 @@ namespace TaskManager
     {
         private Users _currentUser;
         private HeaderPanel _headerPanel;
+        private BodyPanel _bodyPanel;
         private readonly Action<Users> _userChangedAction;
 
 
@@ -22,63 +23,28 @@ namespace TaskManager
                  tableLayoutMain_UserChanged();
 
              };
-            _headerPanel = new HeaderPanelLogIn(_userChangedAction);
-            tableLayoutMain.Controls.Add(_headerPanel, 0, 0);         
+            _headerPanel = new HeaderPanelLogIn(_userChangedAction);            
+            _bodyPanel = new BodyPanelEmpty();
+            tableLayoutMain.Controls.Add(_headerPanel, 0, 0);
+            tableLayoutMain.Controls.Add(_bodyPanel, 0, 1);         
         }
 
         private void tableLayoutMain_UserChanged()
         {
             tableLayoutMain.Controls.Remove(_headerPanel);
+            tableLayoutMain.Controls.Remove(_bodyPanel); 
             if (_currentUser != null)
             {
                 _headerPanel = new HeaderPanelUser(_userChangedAction, _currentUser);
+                _bodyPanel = new BodyPanelUser(_currentUser);
             }
             else
             {
                 _headerPanel = new HeaderPanelLogIn(_userChangedAction, _currentUser);
+                _bodyPanel = new BodyPanelEmpty();
             }
             tableLayoutMain.Controls.Add(_headerPanel, 0, 0);
+            tableLayoutMain.Controls.Add(_bodyPanel, 0, 1); 
         }
-
-        private void layoutPanel_DragDrop(object sender, DragEventArgs e)
-        {
-
-            if (e.Data.GetDataPresent(typeof(TaskCard)))
-            {
-                if (sender is Panel)
-                {
-                    ((Panel)sender).Controls.Add(e.Data.GetData(typeof(TaskCard)) as TaskCard);
-                }
-            }
-        }
-
-        private void layoutPanel_DragEnter(object sender, DragEventArgs e)
-        {
-            if (e.Data.GetDataPresent(typeof(TaskCard)))
-            {
-                e.Effect = DragDropEffects.All;
-            }
-        }
-
-        private void buttonNewTask_OnClick(object sender, EventArgs e)
-        {
-            TaskDialog dialog = new TaskDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                TaskBuilder taskBuilder = new TaskBuilder();
-                taskBuilder.SetTitle(() => dialog.Title);
-                taskBuilder.SetDescription(() => dialog.Description);
-                Task task = taskBuilder.GetTask();
-
-
-                using (var dbContainer = new DataModelContainer())
-                {
-                    
-                    // commit do DB
-                }
-
-                flowLayoutBackLog.Controls.Add(task.GetView());
-            }
-        } 
     }
 }
