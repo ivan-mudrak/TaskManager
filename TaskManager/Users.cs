@@ -23,7 +23,6 @@ namespace TaskManager
         public string Name { get; set; }
         public short Role { get; set; }
         public short Seniority { get; set; }
-        public string Team { get; set; }
         public int TeamsTeamId { get; set; }
         public string Password { get; set; }
         public string FirstName { get; set; }

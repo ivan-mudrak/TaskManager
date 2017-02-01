@@ -38,7 +38,6 @@
     <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="Role" Type="smallint" Nullable="false" />
     <Property Name="Seniority" Type="smallint" Nullable="false" />
-    <Property Name="Team" Type="nvarchar(max)" Nullable="false" />
     <Property Name="TeamsTeamId" Type="int" Nullable="false" />
     <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
     <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
@@ -130,7 +129,6 @@
           <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <Property Name="Role" Type="Int16" Nullable="false" />
           <Property Name="Seniority" Type="Int16" Nullable="false" />
-          <Property Name="Team" Type="String" Nullable="false" MaxLength="Max" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Teams" Relationship="DataModel.TeamsUsers" FromRole="Users" ToRole="Teams" />
           <Property Name="TeamsTeamId" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Tasks" Relationship="DataModel.TasksUsers" FromRole="Users" ToRole="Tasks" />
@@ -185,7 +183,6 @@
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="Seniority" ColumnName="Seniority" />
-          <ScalarProperty Name="Team" ColumnName="Team" />
           <ScalarProperty Name="TeamsTeamId" ColumnName="TeamsTeamId" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />

@@ -14,7 +14,7 @@ namespace TaskManager
         private Users _user;
         private Action<Users> _userAction;
 
-        public HeaderPanelUser(Action<Users> userAction, [NotNull]Users user)
+        public HeaderPanelUser(Action<Users> userAction, [NotNull] Users user)
             : base(userAction, user)
         {
 
@@ -68,7 +68,7 @@ namespace TaskManager
             labelFullRole.Name = "labelFullRole";
             labelFullRole.Size = new Size(384, 19);
             labelFullRole.TabIndex = 2;
-            labelFullRole.Text = "Seniority";
+            labelFullRole.Text = Enum.GetNames(typeof(Seniorities))[_user.Seniority] + " " + Enum.GetNames(typeof(Roles))[_user.Role];
             labelFullRole.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelTeam
@@ -81,7 +81,7 @@ namespace TaskManager
             labelTeam.Name = "labelTeam";
             labelTeam.Size = new Size(35, 26);
             labelTeam.TabIndex = 3;
-            labelTeam.Text = "Team";
+            labelTeam.Text = _user.Teams.Name;
             labelTeam.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // buttonLogOut
