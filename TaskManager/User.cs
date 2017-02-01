@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace TaskManager
 {
@@ -25,15 +21,15 @@ namespace TaskManager
 
     public abstract class User
     {
-        public abstract string Name { get; set; }
-        public abstract Roles Role { get; }
-        public abstract Team Team { get; set; }        
- 
-        public virtual HeaderPanel BuildHeaderPanel(User user)
+        public abstract Users Users { get; protected set; }
+                
+        protected User(Users users) { }
+
+        public virtual HeaderPanel BuildHeaderPanel(Action<Users> userChangedAction)
         {
             return null;
         }
-        public virtual BodyPanel BuildBodyPanel(User user)
+        public virtual BodyPanel BuildBodyPanel()
         {
             return null;
         }

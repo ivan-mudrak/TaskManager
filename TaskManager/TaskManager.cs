@@ -23,7 +23,7 @@ namespace TaskManager
                  tableLayoutMain_UserChanged();
 
              };
-            _headerPanel = new HeaderPanelLogIn(_userChangedAction);            
+            _headerPanel = new HeaderPanelLogIn(_userChangedAction);
             _bodyPanel = new BodyPanelEmpty();
             tableLayoutMain.Controls.Add(_headerPanel, 0, 0);
             tableLayoutMain.Controls.Add(_bodyPanel, 0, 1);         

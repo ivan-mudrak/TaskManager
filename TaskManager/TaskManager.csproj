@@ -76,7 +76,9 @@
     <Compile Include="BodyPanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BodyPanelAdmin.cs" />
+    <Compile Include="BodyPanelAdmin.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="BodyPanelEmpty.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -140,6 +142,7 @@
       <DependentUpon>DataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Tester.cs" />
+    <Compile Include="UnknownUser.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UserManager.cs" />
     <Compile Include="Users.cs">
