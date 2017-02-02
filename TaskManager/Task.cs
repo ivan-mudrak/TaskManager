@@ -18,7 +18,7 @@ namespace TaskManager
 
         public TaskCard GetView()
         {
-            return _taskCard ?? (_taskCard = new TaskCard(Title, Description, new Developer(), new Tester()));
+            return _taskCard ?? (_taskCard = new TaskCard(Title, Description, null, null));
         }
     }
 }

@@ -12,11 +12,11 @@ namespace TaskManager
     using System;
     using System.Collections.Generic;
     
-    public partial class Tasks
+    public partial class TasksEntity
     {
-        public Tasks()
+        public TasksEntity()
         {
-            this.Users = new HashSet<Users>();
+            this.UsersEntity = new HashSet<UsersEntity>();
         }
     
         public int TaskId { get; set; }
@@ -24,6 +24,6 @@ namespace TaskManager
         public string Description { get; set; }
         public short Status { get; set; }
     
-        public virtual ICollection<Users> Users { get; set; }
+        public virtual ICollection<UsersEntity> UsersEntity { get; set; }
     }
 }

@@ -4,12 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1518decc707b4f73ae53fe26e60beccf" Name="Diagram1" >
-        <EntityTypeShape EntityType="DataModel.Teams" Width="1.5" PointX="3.25" PointY="1.125" />
-        <EntityTypeShape EntityType="DataModel.Users" Width="1.5" PointX="6" PointY="2" />
-        <AssociationConnector Association="DataModel.TeamsUsers" />
-        <EntityTypeShape EntityType="DataModel.Tasks" Width="1.5" PointX="0.5" PointY="2" />
-        <AssociationConnector Association="DataModel.TasksUsers" />
+      <Diagram DiagramId="c55738a21e294e56a66d5c39c601d403" Name="Diagram1" >
+        <EntityTypeShape EntityType="DataModel.TeamsEntity" Width="1.5" PointX="3.875" PointY="0.875" />
+        <EntityTypeShape EntityType="DataModel.UsersEntity" Width="1.5" PointX="5.125" PointY="3.125" />
+        <EntityTypeShape EntityType="DataModel.TasksEntity" Width="1.5" PointX="7.75" PointY="2.5" />
+        <AssociationConnector Association="DataModel.TeamsEntityUsersEntity" />
+        <AssociationConnector Association="DataModel.TasksEntityUsersEntity" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

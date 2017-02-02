@@ -1,25 +1,22 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Windows.Forms;
 
 namespace TaskManager
 {
     public partial class TaskManager : Form
     {
-        private Users _currentUser;
+        private User _currentUser;
         private HeaderPanel _headerPanel;
         private BodyPanel _bodyPanel;
-        private readonly Action<Users> _userChangedAction;
+        private readonly Action<UsersEntity> _userChangedAction;
 
 
         public TaskManager()
         {
             InitializeComponent();
-            _userChangedAction = user =>
+            _userChangedAction = users =>
              {
-                 _currentUser = user;
+                 _currentUser = CreateUserFromUsersT(users);
                  tableLayoutMain_UserChanged();
 
              };
@@ -35,16 +32,54 @@ namespace TaskManager
             tableLayoutMain.Controls.Remove(_bodyPanel); 
             if (_currentUser != null)
             {
-                _headerPanel = new HeaderPanelUser(_userChangedAction, _currentUser);
-                _bodyPanel = new BodyPanelUser(_currentUser);
+                _headerPanel = _currentUser.BuildHeaderPanel(_userChangedAction);
+                _bodyPanel = _currentUser.BuildBodyPanel();
             }
             else
             {
-                _headerPanel = new HeaderPanelLogIn(_userChangedAction, _currentUser);
+                _headerPanel = new HeaderPanelLogIn(_userChangedAction);
                 _bodyPanel = new BodyPanelEmpty();
             }
             tableLayoutMain.Controls.Add(_headerPanel, 0, 0);
             tableLayoutMain.Controls.Add(_bodyPanel, 0, 1); 
         }
+
+        private User CreateUserFromUsersT(UsersEntity userEntity)
+        {
+            User user;
+            if (userEntity != null)
+            {
+                switch (userEntity.Role)
+                {
+                    case (short) Roles.Admin:
+                        user = new Admin(userEntity);
+                        break;
+                    case (short) Roles.ScrumMaster:
+                        user = new ScrumMaster(userEntity);
+                        break;
+                    case (short) Roles.ProductOwner:
+                        user = new ProductOwner(userEntity);
+                        break;
+                    case (short) Roles.Developer:
+                        user = new Developer(userEntity);
+                        break;
+                    case (short) Roles.Tester:
+                        user = new Tester(userEntity);
+                        break;
+                    default:
+                        throw new UnknownUserRole();
+                }
+            }
+            else
+            {
+                user = new UnknownUser();
+            }
+            return user;
+        }
+    }
+
+    internal class UnknownUserRole : Exception
+    {
+
     }
 }

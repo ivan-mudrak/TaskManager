@@ -12,28 +12,28 @@ namespace TaskManager
         private int _teamID;
         public string Name { get; private set; }
 
-        public Collection<Users> UserCollection { get { return _usersCollection; } }
-        private readonly Collection<Users> _usersCollection;
-        public Collection<Tasks> TasksCollection { get { return _tasksCollection; } }
-        private readonly Collection<Tasks> _tasksCollection;
+        public Collection<UsersEntity> UserCollection { get { return _usersCollection; } }
+        private readonly Collection<UsersEntity> _usersCollection;
+        public Collection<TasksEntity> TasksCollection { get { return _tasksCollection; } }
+        private readonly Collection<TasksEntity> _tasksCollection;
 
 
         public Team(string name)
         {
             Name = name;
-            _tasksCollection = new Collection<Tasks>();
+            _tasksCollection = new Collection<TasksEntity>();
             FetchTasksDB(_tasksCollection);
 
         }
 
-        private async void FetchTasksDB(Collection<Tasks> tasksCollection)
+        private async void FetchTasksDB(Collection<TasksEntity> tasksCollection)
         {
-            using (var dbContainer = new DataModelContainer())
+            using (var dbContainer = new DataModelContainer1())
             {
                 await dbContainer.Database.Connection.OpenAsync();
-                IQueryable<Tasks> tasks = from task in dbContainer.TasksSet
-                                          from user in task.Users
-                                          where user.TeamsTeamId.Equals(Name)
+                IQueryable<TasksEntity> tasks = from task in dbContainer.TasksEntitySet
+                                          from user in task.UsersEntity
+                                          where user.TeamsEntityTeamId.Equals(Name)
                                           select task;
 
                 dbContainer.Database.Connection.Close();
@@ -41,23 +41,23 @@ namespace TaskManager
             }
         }
 
-        public void AddTask(Tasks task)
+        public void AddTask(TasksEntity task)
         {
             _tasksCollection.Add(task);
             // db update
         }
 
-        public void CompleteTask(Tasks task)
+        public void CompleteTask(TasksEntity task)
         {
             // db update
         }
 
-        public void DeleteTask(Tasks task)
+        public void DeleteTask(TasksEntity task)
         {
             //db update
         }
 
-        private void RemoveTask(Tasks task)
+        private void RemoveTask(TasksEntity task)
         {
             _tasksCollection.Remove(task);
             //db update

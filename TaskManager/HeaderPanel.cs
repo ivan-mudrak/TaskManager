@@ -5,6 +5,6 @@ namespace TaskManager
 {
     public abstract class HeaderPanel : TableLayoutPanel
     {
-        protected HeaderPanel(Action<Users> userChangedAction, Users user) { }
+        protected HeaderPanel(Action<UsersEntity> userChangedAction, UsersEntity userEntity) { }
     }
 }

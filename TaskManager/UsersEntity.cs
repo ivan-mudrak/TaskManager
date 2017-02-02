@@ -12,23 +12,23 @@ namespace TaskManager
     using System;
     using System.Collections.Generic;
     
-    public partial class Users
+    public partial class UsersEntity
     {
-        public Users()
+        public UsersEntity()
         {
-            this.Tasks = new HashSet<Tasks>();
+            this.TasksEntity = new HashSet<TasksEntity>();
         }
     
         public int UserId { get; set; }
         public string Name { get; set; }
         public short Role { get; set; }
         public short Seniority { get; set; }
-        public int TeamsTeamId { get; set; }
-        public string Password { get; set; }
         public string FirstName { get; set; }
         public string SecondName { get; set; }
+        public string Password { get; set; }
+        public int TeamsEntityTeamId { get; set; }
     
-        public virtual Teams Teams { get; set; }
-        public virtual ICollection<Tasks> Tasks { get; set; }
+        public virtual TeamsEntity TeamsEntity { get; set; }
+        public virtual ICollection<TasksEntity> TasksEntity { get; set; }
     }
 }

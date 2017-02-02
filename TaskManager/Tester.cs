@@ -1,35 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace TaskManager
 {
     public class Tester : User
     {
-        public override string Name { get; set; }
-        public override Team Team { get; set; }
+        public override UsersEntity UserEntity { get; protected set; }
 
-        public override Roles Role
+        public Tester([NotNull]UsersEntity userEntity) : base(userEntity)
         {
-            get { return Roles.Tester; }
+            UserEntity = userEntity;
         }
 
-
-        public Tester()
+        public override HeaderPanel BuildHeaderPanel(Action<UsersEntity> userChangedAction)
         {
-
+            return new HeaderPanelUser(userChangedAction, UserEntity);
         }
 
-        public override HeaderPanel BuildHeaderPanel(User user)
+        public override BodyPanel BuildBodyPanel()
         {
-            return null;
-        }
-
-        public override BodyPanel BuildBodyPanel(User user)
-        {
-            return null;
+            return new BodyPanelUser(UserEntity);
         }
     }
 }

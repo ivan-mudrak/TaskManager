@@ -4,20 +4,20 @@ namespace TaskManager
 {
     class UnknownUser : User
     {
-        public override Users Users
+        public override UsersEntity UserEntity
         {
             get { throw new NotImplementedException(); }
             protected set { throw new NotImplementedException(); }
         }
    
      
-        public UnknownUser(Users users = null)
-            : base(users)
+        public UnknownUser(UsersEntity userEntity = null)
+            : base(userEntity)
         {
                  
         }
 
-        public override HeaderPanel BuildHeaderPanel(Action<Users> userChanegdAction)
+        public override HeaderPanel BuildHeaderPanel(Action<UsersEntity> userChanegdAction)
         {
             return new HeaderPanelLogIn(userChanegdAction);
         }

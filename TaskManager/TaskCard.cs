@@ -15,7 +15,7 @@ namespace TaskManager
         private MouseEventHandler _childMouseDown;
         private EventHandler _childDoubleClick;
 
-        public TaskCard([NotNull]string title, [NotNull]string description, [NotNull]Developer developer, [NotNull]Tester tester)
+        public TaskCard([NotNull]string title, [NotNull]string description, Developer developer = null, Tester tester = null)
         {
             // 
             // _title
@@ -31,7 +31,7 @@ namespace TaskManager
             _title.Size = new System.Drawing.Size(221, 15);
             _title.TabIndex = 2;
             _title.Text = title;
-            _title.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
+            _title.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _description
             // 
@@ -46,7 +46,7 @@ namespace TaskManager
             _description.Size = new System.Drawing.Size(221, 65);
             _description.TabIndex = 3;
             _description.Text = description;
-            _description.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
+            _description.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _developerLabel
             // 
@@ -59,7 +59,7 @@ namespace TaskManager
             _developerLabel.Size = new System.Drawing.Size(85, 13);
             _developerLabel.TabIndex = 0;
             _developerLabel.Text = "Developer(s):";
-            _developerLabel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
+            _developerLabel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _developers
             // 
@@ -73,7 +73,7 @@ namespace TaskManager
             _developers.Size = new System.Drawing.Size(39, 13);
             _developers.TabIndex = 2;
             _developers.Text = developer.ToString();
-            _developers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
+            _developers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _developerLayoutPanel
             // 
@@ -91,7 +91,7 @@ namespace TaskManager
             _developerLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             _developerLayoutPanel.Size = new System.Drawing.Size(221, 15);
             _developerLayoutPanel.TabIndex = 0;
-            _developerLayoutPanel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
+            _developerLayoutPanel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _testerLabel
             // 
@@ -104,7 +104,7 @@ namespace TaskManager
             _testerLabel.Size = new System.Drawing.Size(51, 13);
             _testerLabel.TabIndex = 0;
             _testerLabel.Text = "Tester(s):";
-            _testerLabel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
+            _testerLabel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _testers
             // 
@@ -118,7 +118,7 @@ namespace TaskManager
             _testers.Size = new System.Drawing.Size(39, 13);
             _testers.TabIndex = 2;
             _testers.Text = tester.ToString();
-            _testers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
+            _testers.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
             // 
             // _testerLayoutPanel
             // 
@@ -136,7 +136,7 @@ namespace TaskManager
             _testerLayoutPanel.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             _testerLayoutPanel.Size = new System.Drawing.Size(221, 16);
             _testerLayoutPanel.TabIndex = 1;
-            _testerLayoutPanel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);            
+            _testerLayoutPanel.MouseDown += new MouseEventHandler(taskCardChild_MouseDown);
 
             CellBorderStyle = TableLayoutPanelCellBorderStyle.Single;
             ColumnCount = 1;
@@ -157,7 +157,7 @@ namespace TaskManager
             TabIndex = 0;
             _childMouseDown += new MouseEventHandler(taskCard_ChildMouseDown);
             _childDoubleClick += new EventHandler(taskCard_ChildDoubleClick);
-        }  
+        }
 
         private void taskCard_ChildDoubleClick(object sender, EventArgs e)
         {
@@ -178,7 +178,7 @@ namespace TaskManager
             {
                 taskCard_ChildMouseDown(sender, e);
             }
-      
+
         }
 
         private void taskCard_ChildMouseDown(object sender, MouseEventArgs e)

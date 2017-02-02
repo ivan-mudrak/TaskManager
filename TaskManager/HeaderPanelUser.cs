@@ -11,15 +11,15 @@ namespace TaskManager
         private Label labelFullName;
         private Label labelTeam;
         private Button buttonLogOut;
-        private Users _user;
-        private Action<Users> _userAction;
+        private UsersEntity _userEntity;
+        private Action<UsersEntity> _userAction;
 
-        public HeaderPanelUser(Action<Users> userAction, [NotNull] Users user)
-            : base(userAction, user)
+        public HeaderPanelUser(Action<UsersEntity> userAction, [NotNull] UsersEntity userEntity)
+            : base(userAction, userEntity)
         {
 
             _userAction = userAction;
-            _user = user;
+            _userEntity = userEntity;
             labelFullName = new Label();
             labelFullRole = new Label();
             labelTeam = new Label();
@@ -56,7 +56,7 @@ namespace TaskManager
             labelFullName.Name = "labelFullName";
             labelFullName.Size = new Size(482, 22);
             labelFullName.TabIndex = 0;
-            labelFullName.Text = _user.FirstName + ", " + _user.SecondName;
+            labelFullName.Text = _userEntity.FirstName + ", " + _userEntity.SecondName;
             labelFullName.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelFullRole
@@ -68,7 +68,7 @@ namespace TaskManager
             labelFullRole.Name = "labelFullRole";
             labelFullRole.Size = new Size(384, 19);
             labelFullRole.TabIndex = 2;
-            labelFullRole.Text = Enum.GetNames(typeof(Roles))[_user.Role] + ", " + Enum.GetNames(typeof(Seniorities))[_user.Seniority];
+            labelFullRole.Text = Enum.GetNames(typeof(Roles))[_userEntity.Role] + ", " + Enum.GetNames(typeof(Seniorities))[_userEntity.Seniority];
             labelFullRole.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // labelTeam
@@ -81,7 +81,7 @@ namespace TaskManager
             labelTeam.Name = "labelTeam";
             labelTeam.Size = new Size(35, 26);
             labelTeam.TabIndex = 3;
-            labelTeam.Text = "Team: " + _user.Teams.Name;
+            labelTeam.Text = "Team: " + _userEntity.TeamsEntity.Name;
             labelTeam.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // buttonLogOut

@@ -4,8 +4,7 @@ namespace TaskManager
 {
     public enum Roles
     {
-        Admin,
-        Manager,
+        Admin,       
         ScrumMaster,
         ProductOwner,
         Developer,
@@ -21,11 +20,11 @@ namespace TaskManager
 
     public abstract class User
     {
-        public abstract Users Users { get; protected set; }
-                
-        protected User(Users users) { }
+        public abstract UsersEntity UserEntity { get; protected set; }
 
-        public virtual HeaderPanel BuildHeaderPanel(Action<Users> userChangedAction)
+        protected User(UsersEntity userEntity) { }
+
+        public virtual HeaderPanel BuildHeaderPanel(Action<UsersEntity> userChangedAction)
         {
             return null;
         }

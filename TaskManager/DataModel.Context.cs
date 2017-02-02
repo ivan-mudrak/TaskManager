@@ -13,10 +13,10 @@ namespace TaskManager
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class DataModelContainer : DbContext
+    public partial class DataModelContainer1 : DbContext
     {
-        public DataModelContainer()
-            : base("name=DataModelContainer")
+        public DataModelContainer1()
+            : base("name=DataModelContainer1")
         {
         }
     
@@ -25,8 +25,8 @@ namespace TaskManager
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Teams> TeamsSet { get; set; }
-        public virtual DbSet<Users> UsersSet { get; set; }
-        public virtual DbSet<Tasks> TasksSet { get; set; }
+        public virtual DbSet<TeamsEntity> TeamsEntitySet { get; set; }
+        public virtual DbSet<UsersEntity> UsersEntitySet { get; set; }
+        public virtual DbSet<TasksEntity> TasksEntitySet { get; set; }
     }
 }

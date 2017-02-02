@@ -12,16 +12,16 @@ namespace TaskManager
     using System;
     using System.Collections.Generic;
     
-    public partial class Teams
+    public partial class TeamsEntity
     {
-        public Teams()
+        public TeamsEntity()
         {
-            this.Users = new HashSet<Users>();
+            this.UsersEntity = new HashSet<UsersEntity>();
         }
     
         public int TeamId { get; set; }
         public string Name { get; set; }
     
-        public virtual ICollection<Users> Users { get; set; }
+        public virtual ICollection<UsersEntity> UsersEntity { get; set; }
     }
 }

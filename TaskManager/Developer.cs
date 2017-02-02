@@ -3,24 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 
 namespace TaskManager
 {
 
     public class Developer : User
     {
-        public Developer()
-            : base()
-        {
+        public override UsersEntity UserEntity { get; protected set; }
 
+        public Developer([NotNull]UsersEntity userEntity) : base(userEntity)
+        {
+           UserEntity = userEntity;
         }
 
-        public override string Name { get; set; }
-        public override Team Team { get; set; }
-
-        public override Roles Role
+        public override HeaderPanel BuildHeaderPanel(Action<UsersEntity> userChangedAction)
         {
-            get { return Roles.Developer; }
-        }        
+            return new HeaderPanelUser(userChangedAction, UserEntity);
+        }
+        public override BodyPanel BuildBodyPanel()
+        {
+            return new BodyPanelUser(UserEntity);
+        }
+  
     }
 }

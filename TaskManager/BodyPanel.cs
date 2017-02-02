@@ -4,6 +4,6 @@ namespace TaskManager
 {
     public abstract class BodyPanel : TableLayoutPanel
     {
-        protected BodyPanel(Users user) { }
+        protected BodyPanel(UsersEntity userEntity) { }
     }
 }
