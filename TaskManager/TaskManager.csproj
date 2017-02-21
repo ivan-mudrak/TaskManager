@@ -112,7 +112,6 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="ITaskBuilder.cs" />
-    <Compile Include="IUserCreator.cs" />
     <Compile Include="ProductOwner.cs" />
     <Compile Include="ScrumMaster.cs" />
     <Compile Include="Task.cs" />

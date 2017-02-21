@@ -1,8 +1,7 @@
-﻿using System.Data.Entity;
+﻿using System;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
-using System.Data.SqlClient;
 
 namespace TaskManager
 {
@@ -12,6 +11,8 @@ namespace TaskManager
         private TableLayoutPanel tableLayoutPanelUserInfo;
         private Label labelUser;
         private Label labelFirstName;
+        private GroupBox activeGroupBox;
+        private GroupBox groupBoxTeams;
         private GroupBox groupBoxUserInfo;
         private Label labelSecondName;
         private Label labelRole;
@@ -19,6 +20,7 @@ namespace TaskManager
         private Label labelTeam;
         private Label labelPassword;
         private Button buttonSave;
+        private Button buttonCancel;
         private TextBox textBoxUser;
         private TextBox textBoxSecondName;
         private TextBox textBoxFirstName;
@@ -26,7 +28,6 @@ namespace TaskManager
         private TextBox textBoxTeam;
         private ComboBox comboBoxSeniority;
         private ComboBox comboBoxRole;
-        private GroupBox groupBoxUsers;
         private TreeView treeViewUsers;
         private TreeNode treeNodeNewTeam;
 
@@ -47,6 +48,7 @@ namespace TaskManager
             labelTeam = new Label();
             labelPassword = new Label();
             buttonSave = new Button();
+            buttonCancel = new Button();
             textBoxUser = new TextBox();
             textBoxPassword = new TextBox();
             textBoxFirstName = new TextBox();
@@ -54,7 +56,7 @@ namespace TaskManager
             comboBoxRole = new ComboBox();
             comboBoxSeniority = new ComboBox();
             textBoxTeam = new TextBox();
-            groupBoxUsers = new GroupBox();
+            groupBoxTeams = new GroupBox();
             treeViewUsers = new TreeView();
             treeNodeNewTeam = new TreeNode();
 
@@ -65,7 +67,7 @@ namespace TaskManager
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 55F));
             ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 45F));
             Controls.Add(groupBoxUserInfo, 1, 0);
-            Controls.Add(groupBoxUsers, 0, 0);
+            Controls.Add(groupBoxTeams, 0, 0);
             Dock = DockStyle.Fill;
             Location = new Point(4, 75);
             Name = "tableLayoutBodyAdmin";
@@ -73,6 +75,7 @@ namespace TaskManager
             RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             Size = new Size(976, 500);
             TabIndex = 0;
+
             // 
             // tableLayoutPanelUserInfo
             // 
@@ -92,6 +95,7 @@ namespace TaskManager
             tableLayoutPanelUserInfo.Controls.Add(labelSecondName, 0, 4);
             tableLayoutPanelUserInfo.Controls.Add(labelFirstName, 0, 3);
             tableLayoutPanelUserInfo.Controls.Add(labelPassword, 0, 2);
+            tableLayoutPanelUserInfo.Controls.Add(buttonCancel, 0, 9);
             tableLayoutPanelUserInfo.Controls.Add(buttonSave, 1, 9);
             tableLayoutPanelUserInfo.Controls.Add(textBoxUser, 1, 1);
             tableLayoutPanelUserInfo.Controls.Add(comboBoxRole, 1, 5);
@@ -211,7 +215,7 @@ namespace TaskManager
             // 
             // buttonSave
             // 
-            buttonSave.Anchor = AnchorStyles.Right;
+            buttonSave.Anchor = AnchorStyles.Left;
             buttonSave.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             buttonSave.Location = new Point(345, 438);
             buttonSave.Name = "buttonSave";
@@ -219,6 +223,19 @@ namespace TaskManager
             buttonSave.TabIndex = 8;
             buttonSave.Text = "Save";
             buttonSave.UseVisualStyleBackColor = true;
+            buttonSave.Click += buttonSave_Click;
+            // 
+            // buttonCancel
+            // 
+            buttonCancel.Anchor = AnchorStyles.Right;
+            buttonCancel.AutoSizeMode = AutoSizeMode.GrowAndShrink;
+            buttonCancel.Location = new Point(345, 438);
+            buttonCancel.Name = "buttonCancel";
+            buttonCancel.Size = new Size(70, 30);
+            buttonCancel.TabIndex = 8;
+            buttonCancel.Text = "Cancel";
+            buttonCancel.UseVisualStyleBackColor = true;
+            buttonCancel.Click += buttonCancel_Click;
             // 
             // textBoxUser
             // 
@@ -290,17 +307,17 @@ namespace TaskManager
             textBoxTeam.Size = new Size(142, 20);
             textBoxTeam.TabIndex = 15;
             // 
-            // groupBoxUsers
+            // groupBoxTeams
             // 
-            groupBoxUsers.BackColor = SystemColors.GradientInactiveCaption;
-            groupBoxUsers.Controls.Add(treeViewUsers);
-            groupBoxUsers.Dock = DockStyle.Fill;
-            groupBoxUsers.Location = new Point(3, 3);
-            groupBoxUsers.Name = "groupBoxUsers";
-            groupBoxUsers.Size = new Size(530, 494);
-            groupBoxUsers.TabIndex = 2;
-            groupBoxUsers.TabStop = false;
-            groupBoxUsers.Text = "Teams";
+            groupBoxTeams.BackColor = SystemColors.GradientInactiveCaption;
+            groupBoxTeams.Controls.Add(treeViewUsers);
+            groupBoxTeams.Dock = DockStyle.Fill;
+            groupBoxTeams.Location = new Point(3, 3);
+            groupBoxTeams.Name = "groupBoxTeams";
+            groupBoxTeams.Size = new Size(530, 494);
+            groupBoxTeams.TabIndex = 2;
+            groupBoxTeams.TabStop = false;
+            groupBoxTeams.Text = "Teams";
             // 
             // treeViewUsers
             // 
@@ -320,39 +337,73 @@ namespace TaskManager
             treeViewUsers.LabelEdit = true;
             treeViewUsers.ShowPlusMinus = true;
             treeViewUsers.NodeMouseDoubleClick += treeViewUsers_NodeMouseDoubleClick;
-            treeViewUsers.AfterLabelEdit += treeViewUsers_AfterLabelEdit;        
+            treeViewUsers.AfterLabelEdit += treeViewUsers_AfterLabelEdit;
             #endregion
 
             LoadTeamsEntities();
+            EnableControls(groupBoxTeams, false);
+            EnableControls(groupBoxUserInfo, false);
+            SetActiveGroupBox(groupBoxTeams);
+        }
+
+        void EnableControls(Control control, bool state)
+        {
+            foreach (Control c in control.Controls)
+            {
+                c.Enabled = state;
+            }
+        }
+
+        void buttonCancel_Click(object sender, System.EventArgs e)
+        {
+            SetActiveGroupBox(groupBoxTeams);
+        }
+
+        void buttonSave_Click(object sender, System.EventArgs e)
+        {
+            // Save user
+            SetActiveGroupBox(groupBoxTeams);
+        }
+
+        private void SetActiveGroupBox(GroupBox groupBox)
+        {
+            if (activeGroupBox != null) { EnableControls(activeGroupBox, false); }
+            activeGroupBox = groupBox;
+            EnableControls(activeGroupBox, true);
         }
 
         void treeViewUsers_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (!e.Node.Equals(treeNodeNewTeam))
+            if (e.Node.Equals(treeNodeNewTeam))
+            {
+                TreeNode treeNode = new TreeNode();
+                treeNode.Nodes.Add(new TreeNode() { Name = NewUserNodeName, Text = " ... " });
+                treeViewUsers.Nodes.Insert(treeViewUsers.Nodes.Count - 1, treeNode);
+                treeNode.BeginEdit();
+
+            }
+            else if (e.Node.Name.Equals(NewUserNodeName))
+            {
+                SetActiveGroupBox(groupBoxUserInfo);
+            }
+            else
             {
                 if (!e.Node.IsEditing)
                 {
                     e.Node.BeginEdit();
                 }
             }
-            else
-            {
-                TreeNode treeNode = new TreeNode();     
-                treeNode.Nodes.Add(new TreeNode() { Name = NewUserNodeName, Text = " ... " });
-                treeViewUsers.Nodes.Insert(treeViewUsers.Nodes.Count - 1, treeNode);
-                treeNode.BeginEdit();
-            }
         }
 
         void treeViewUsers_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
-            if ((!e.Node.Equals(treeNodeNewTeam)) && (!e.Node.Name.Equals(NewUserNodeName)))
+            if (!e.Node.Equals(treeNodeNewTeam) && !e.Node.Name.Equals(NewUserNodeName))
             {
                 if (!string.IsNullOrEmpty(e.Label))
                 {
                     e.Node.EndEdit(false);
                     e.Node.Text = e.Label;
-               //     SaveTeamEntity(e.Node);                 
+                    // SaveTeamEntity(e.Node);                 
                 }
                 else
                 {
@@ -361,7 +412,6 @@ namespace TaskManager
                     e.Node.BeginEdit();
                 }
             }
-
         }
 
         async void SaveTeamEntity(TreeNode treeNode)
@@ -370,9 +420,9 @@ namespace TaskManager
             {
                 await dbContainer.Database.Connection.OpenAsync();
                 TeamsEntity teamEntity = new TeamsEntity { Name = treeNode.Text };
-                dbContainer.TeamsEntitySet.Add(teamEntity);                
+                dbContainer.TeamsEntitySet.Add(teamEntity);
                 await dbContainer.SaveChangesAsync();
-                dbContainer.Database.Connection.Close();               
+                dbContainer.Database.Connection.Close();
             }
         }
 
