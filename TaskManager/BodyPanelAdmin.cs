@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -25,7 +26,7 @@ namespace TaskManager
         private TextBox textBoxSecondName;
         private TextBox textBoxFirstName;
         private TextBox textBoxPassword;
-        private TextBox textBoxTeam;
+        private ComboBox comboBoxTeam;
         private ComboBox comboBoxSeniority;
         private ComboBox comboBoxRole;
         private TreeView treeViewUsers;
@@ -55,7 +56,7 @@ namespace TaskManager
             textBoxSecondName = new TextBox();
             comboBoxRole = new ComboBox();
             comboBoxSeniority = new ComboBox();
-            textBoxTeam = new TextBox();
+            comboBoxTeam = new ComboBox();
             groupBoxTeams = new GroupBox();
             treeViewUsers = new TreeView();
             treeNodeNewTeam = new TreeNode();
@@ -83,7 +84,7 @@ namespace TaskManager
             tableLayoutPanelUserInfo.ColumnCount = 2;
             tableLayoutPanelUserInfo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 40F));
             tableLayoutPanelUserInfo.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 60F));
-            tableLayoutPanelUserInfo.Controls.Add(textBoxTeam, 1, 7);
+            tableLayoutPanelUserInfo.Controls.Add(comboBoxTeam, 1, 7);
             tableLayoutPanelUserInfo.Controls.Add(comboBoxSeniority, 1, 6);
             tableLayoutPanelUserInfo.Controls.Add(textBoxSecondName, 1, 4);
             tableLayoutPanelUserInfo.Controls.Add(textBoxFirstName, 1, 3);
@@ -286,6 +287,18 @@ namespace TaskManager
             comboBoxRole.Name = "comboBoxRole";
             comboBoxRole.Size = new Size(139, 21);
             comboBoxRole.TabIndex = 13;
+            comboBoxRole.DataSource = Enum.GetValues(typeof(Roles))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()),
+                        typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            comboBoxRole.DisplayMember = "Description";
+            comboBoxRole.ValueMember = "value";
             // 
             // comboBoxSeniority
             // 
@@ -296,16 +309,28 @@ namespace TaskManager
             comboBoxSeniority.Name = "comboBoxSeniority";
             comboBoxSeniority.Size = new Size(139, 21);
             comboBoxSeniority.TabIndex = 14;
+            comboBoxSeniority.DataSource = Enum.GetValues(typeof(Seniorities))
+                    .Cast<Enum>()
+                    .Select(value => new
+                    {
+                        (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()),
+                        typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                        value
+                    })
+                    .OrderBy(item => item.value)
+                    .ToList();
+            comboBoxSeniority.DisplayMember = "Description";
+            comboBoxSeniority.ValueMember = "value";            
             // 
-            // textBoxTeam
+            // comboBoxTeam
             // 
-            textBoxTeam.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
-            textBoxTeam.Location = new Point(167, 363);
-            textBoxTeam.Margin = new Padding(0);
-            textBoxTeam.MaxLength = 100;
-            textBoxTeam.Name = "textBoxTeam";
-            textBoxTeam.Size = new Size(142, 20);
-            textBoxTeam.TabIndex = 15;
+            comboBoxTeam.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+            comboBoxTeam.Location = new Point(167, 363);
+            comboBoxTeam.Margin = new Padding(0);
+            comboBoxTeam.MaxLength = 100;
+            comboBoxTeam.Name = "comboBoxTeam";
+            comboBoxTeam.Size = new Size(142, 20);
+            comboBoxTeam.TabIndex = 15;
             // 
             // groupBoxTeams
             // 
@@ -346,23 +371,12 @@ namespace TaskManager
             SetActiveGroupBox(groupBoxTeams);
         }
 
-        void EnableControls(Control control, bool state)
+        private void EnableControls(Control control, bool state)
         {
             foreach (Control c in control.Controls)
             {
                 c.Enabled = state;
             }
-        }
-
-        void buttonCancel_Click(object sender, System.EventArgs e)
-        {
-            SetActiveGroupBox(groupBoxTeams);
-        }
-
-        void buttonSave_Click(object sender, System.EventArgs e)
-        {
-            // Save user
-            SetActiveGroupBox(groupBoxTeams);
         }
 
         private void SetActiveGroupBox(GroupBox groupBox)
@@ -372,7 +386,9 @@ namespace TaskManager
             EnableControls(activeGroupBox, true);
         }
 
-        void treeViewUsers_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        #region Teams
+
+        private void treeViewUsers_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
             if (e.Node.Equals(treeNodeNewTeam))
             {
@@ -395,7 +411,7 @@ namespace TaskManager
             }
         }
 
-        void treeViewUsers_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
+        private void treeViewUsers_AfterLabelEdit(object sender, NodeLabelEditEventArgs e)
         {
             if (!e.Node.Equals(treeNodeNewTeam) && !e.Node.Name.Equals(NewUserNodeName))
             {
@@ -403,7 +419,7 @@ namespace TaskManager
                 {
                     e.Node.EndEdit(false);
                     e.Node.Text = e.Label;
-                    // SaveTeamEntity(e.Node);                 
+                    //      SaveTeamEntity(new TeamsEntity { Name = e.Node.Text });
                 }
                 else
                 {
@@ -414,19 +430,59 @@ namespace TaskManager
             }
         }
 
-        async void SaveTeamEntity(TreeNode treeNode)
+        #endregion
+
+        #region User
+
+        private void buttonCancel_Click(object sender, System.EventArgs e)
+        {
+            SetActiveGroupBox(groupBoxTeams);
+        }
+
+        private void buttonSave_Click(object sender, System.EventArgs e)
+        {
+            UsersEntity userEntity = new UsersEntity
+            {
+                Name = textBoxUser.Text,
+                Password = textBoxPassword.Text,
+                FirstName = textBoxFirstName.Text,
+                SecondName = textBoxSecondName.Text,
+                Role = (short)comboBoxRole.SelectedIndex,
+                Seniority = (short)comboBoxSeniority.SelectedIndex,
+            };
+
+            SaveUserEntity(userEntity);
+            SetActiveGroupBox(groupBoxTeams);
+        }
+
+        #endregion
+
+        #region Entity
+
+        private async void SaveUserEntity(UsersEntity userEntity)
         {
             using (var dbContainer = new DataModelContainer1())
             {
                 await dbContainer.Database.Connection.OpenAsync();
-                TeamsEntity teamEntity = new TeamsEntity { Name = treeNode.Text };
+                dbContainer.UsersEntitySet.Add(userEntity);
+                await dbContainer.SaveChangesAsync();
+                dbContainer.Database.Connection.Close();
+            }
+
+        }
+
+        private async void SaveTeamEntity(TeamsEntity teamEntity)
+        {
+            using (var dbContainer = new DataModelContainer1())
+            {
+                await dbContainer.Database.Connection.OpenAsync();
                 dbContainer.TeamsEntitySet.Add(teamEntity);
                 await dbContainer.SaveChangesAsync();
                 dbContainer.Database.Connection.Close();
             }
         }
 
-        async void LoadTeamsEntities()
+        private async void LoadTeamsEntities()
         {
             using (var dbContainer = new DataModelContainer1())
             {
@@ -440,5 +496,7 @@ namespace TaskManager
                 dbContainer.Database.Connection.Close();
             }
         }
+
+        #endregion
     }
 }

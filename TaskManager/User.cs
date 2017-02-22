@@ -1,21 +1,34 @@
 ﻿using System;
+using System.ComponentModel;
 
 namespace TaskManager
 {
     public enum Roles
     {
-        Admin,       
-        ScrumMaster,
-        ProductOwner,
-        Developer,
-        Tester
+        [Description("(none)")]
+        None = -1,
+        [Description("Administrator")]
+        Admin = 0,       
+        [Description("Scrum Master")]
+        ScrumMaster = 1,
+        [Description("Product Owner")]
+        ProductOwner = 2,
+        [Description("Developer")]
+        Developer = 3,
+        [Description("Tester")]
+        Tester = 4
     }
 
     public enum Seniorities
     {
-        Junior,
-        Middle,
-        Senior
+        [Description("(none)")]
+        None = -1,
+        [Description("Junior")]
+        Junior = 0,
+        [Description("Middle")]
+        Middle = 1,
+        [Description("Senior")]
+        Senior = 2
     }
 
     public abstract class User
